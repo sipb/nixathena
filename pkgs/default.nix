@@ -27,6 +27,8 @@ in
   moira = callPackage ./moira.nix { };
   pam-afs-session = callPackage ./pam-afs-session.nix { };
   lightdm-debathena-greeter = callPackage ./lightdm-debathena-greeter { };
+  libkrb5-e2fs = callPackage ./libkrb5-e2fs.nix { };
+  zephyr = callPackage ./zephyr.nix { };
   # https://ryantm.github.io/nixpkgs/builders/images/dockertools/
   #   docker = pkgs.dockerTools.buildLayeredImage {
   #     name = "${dockerName}";

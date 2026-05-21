@@ -13,6 +13,7 @@ let
     athena-pkgs.discuss
     athena-pkgs.remctl
     athena-pkgs.moira
+    athena-pkgs.zephyr
   ];
 in
 {
@@ -68,12 +69,26 @@ in
     };
     # LightDM greeter
     # It may just show a black screen if AFS hangs
-    services.xserver.displayManager.lightdm = lib.mkIf config.services.xserver.displayManager.lightdm.enable {
-      greeter = lib.mkDefault {
-        package = athena-pkgs.lightdm-debathena-greeter.xgreeters;
-        name = "debathena-lightdm-greeter";
+    services.xserver.displayManager.lightdm =
+      lib.mkIf config.services.xserver.displayManager.lightdm.enable
+        {
+          greeter = lib.mkDefault {
+            package = athena-pkgs.lightdm-debathena-greeter.xgreeters;
+            name = "debathena-lightdm-greeter";
+          };
+          greeters.gtk.enable = false;
+        };
+    # Zephyr
+    # From https://github.com/andersk/nixathena/blob/main/modules/zephyr-client.nix
+    networking.firewall.allowedUDPPorts = [ 2104 ];
+    systemd.services.athena-zhm = {
+      description = "Zephyr host manager";
+      after = [ "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${lib.getBin pkgs.athena.zephyr}/bin/zhm -n -f";
       };
-      greeters.gtk.enable = false;
     };
   };
 }
