@@ -26,6 +26,7 @@ in
   remctl = callPackage ./remctl.nix { };
   moira = callPackage ./moira.nix { };
   pam-afs-session = callPackage ./pam-afs-session.nix { };
+  lightdm-debathena-greeter = callPackage ./lightdm-debathena-greeter { };
   # https://ryantm.github.io/nixpkgs/builders/images/dockertools/
   #   docker = pkgs.dockerTools.buildLayeredImage {
   #     name = "${dockerName}";

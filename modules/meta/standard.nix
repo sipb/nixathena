@@ -66,5 +66,14 @@ in
         order = 20000;
       };
     };
+    # LightDM greeter
+    # It may just show a black screen if AFS hangs
+    services.xserver.displayManager.lightdm = lib.mkIf config.services.xserver.displayManager.lightdm.enable {
+      greeter = lib.mkDefault {
+        package = athena-pkgs.lightdm-debathena-greeter.xgreeters;
+        name = "debathena-lightdm-greeter";
+      };
+      greeters.gtk.enable = false;
+    };
   };
 }
