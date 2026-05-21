@@ -6,11 +6,20 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 let
   athena-pkgs = pkgs.extend (import ./pkgs);
-  athena-python3 = athena-pkgs.python3.withPackages (ps: with ps; [ python-discuss python-afs python-hesiod locker-support ]);
+  athena-python3 = athena-pkgs.python3.withPackages (
+    ps: with ps; [
+      python-discuss
+      python-afs
+      python-hesiod
+      locker-support
+    ]
+  );
 in
 {
   # The `lib`, `modules`, and `overlays` names are special
@@ -24,17 +33,26 @@ in
   inherit athena-pkgs athena-python3;
   # linkFarmFromDrvs is undocumented, but the source is at
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders/default.nix#L578
-  default = pkgs.linkFarmFromDrvs "nixathena-pkgs" (with athena-pkgs; [ discuss pyhesiodfs remctl moira athena-python3 ]);
+  default = pkgs.linkFarmFromDrvs "nixathena-pkgs" (
+    with athena-pkgs;
+    [
+      discuss
+      pyhesiodfs
+      remctl
+      moira
+      athena-python3
+    ]
+  );
   inherit (athena-pkgs)
     debathena-aclocal
     discuss
     pyhesiodfs
     remctl
     moira
-  ;
+    ;
   inherit (athena-pkgs.python3Packages)
     python-discuss
     python-afs
     python-hesiod
-  ;
+    ;
 }

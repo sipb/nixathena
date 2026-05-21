@@ -12,7 +12,8 @@
 
 let
   fs = lib.fileset;
-in buildPythonPackage {
+in
+buildPythonPackage {
   pname = "locker-support";
   version = "10.4.7";
 

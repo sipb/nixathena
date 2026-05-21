@@ -1,5 +1,10 @@
-{ stdenv, lib, fetchurl,
-  pam, krb5, openafs,
+{
+  stdenv,
+  lib,
+  fetchurl,
+  pam,
+  krb5,
+  openafs,
 }:
 
 # Note that there are two projects named pam_krb5! The one in nixpkgs doesn't have AFS support so we need to use pam-afs-session instead

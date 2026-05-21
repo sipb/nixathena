@@ -1,7 +1,19 @@
-{ stdenv, pkgs, lib, fetchurl, fetchFromGitHub,
-  autoreconfHook, autoconf, automake, pkg-config,
-  libkrb5, libevent, pcre2, systemdLibs,
-  python3, perl,
+{
+  stdenv,
+  pkgs,
+  lib,
+  fetchurl,
+  fetchFromGitHub,
+  autoreconfHook,
+  autoconf,
+  automake,
+  pkg-config,
+  libkrb5,
+  libevent,
+  pcre2,
+  systemdLibs,
+  python3,
+  perl,
 }:
 
 stdenv.mkDerivation rec {
@@ -24,7 +36,7 @@ stdenv.mkDerivation rec {
     pcre2
     systemdLibs
     python3 # python bindings
-    perl    # build man pages
+    perl # build man pages
   ];
 
   patches = [
@@ -41,14 +53,14 @@ stdenv.mkDerivation rec {
   # macros and ./bootstrap makes the man pages, so it's hard to skip
   # either.
   preConfigure = ''
-  echo Running bootstrap
-  ./bootstrap
-  echo Finished bootstrap
-  configureFlagsArray+=(
-    "--with-systemdsystemunitdir=$out/etc/systemd/system"
-  )
+    echo Running bootstrap
+    ./bootstrap
+    echo Finished bootstrap
+    configureFlagsArray+=(
+      "--with-systemdsystemunitdir=$out/etc/systemd/system"
+    )
   '';
   postInstall = ''
-  cp examples/remctl.conf $out/etc/
+    cp examples/remctl.conf $out/etc/
   '';
 }

@@ -1,5 +1,9 @@
 # From https://blakesmith.me/2024/03/02/running-nixos-tests-with-flakes.html
-{ self, pkgs, system, }:
+{
+  self,
+  pkgs,
+  system,
+}:
 
 let
   nixathena = self.legacyPackages.${system};
@@ -7,12 +11,14 @@ in
 
 pkgs.nixosTest {
   name = "meta-standard";
-  nodes.machine = { config, pkgs, ... }: {
-    imports = [
-      nixathena.modules.options
-    ];
-    nixathena.meta.standard.enable = true;
-  };
+  nodes.machine =
+    { config, pkgs, ... }:
+    {
+      imports = [
+        nixathena.modules.options
+      ];
+      nixathena.meta.standard.enable = true;
+    };
 
   testScript = ''
     machine.wait_for_unit("pyhesiodfs.service")

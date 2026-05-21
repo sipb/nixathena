@@ -1,11 +1,18 @@
-{ stdenv, pkgs, lib, fetchFromGitHub,
-  cython, buildPythonPackage, setuptools,
+{
+  stdenv,
+  pkgs,
+  lib,
+  fetchFromGitHub,
+  cython,
+  buildPythonPackage,
+  setuptools,
   hesiod,
 }:
 
 let
   fs = lib.fileset;
-in buildPythonPackage {
+in
+buildPythonPackage {
   pname = "python-hesiod";
   version = "0.2.13";
 

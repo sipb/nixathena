@@ -1,8 +1,16 @@
-{ stdenv, pkgs, lib, fetchFromGitHub, buildPythonPackage, setuptools, }:
+{
+  stdenv,
+  pkgs,
+  lib,
+  fetchFromGitHub,
+  buildPythonPackage,
+  setuptools,
+}:
 
 let
   fs = lib.fileset;
-in buildPythonPackage {
+in
+buildPythonPackage {
   pname = "python-discuss";
   version = "1.2";
 

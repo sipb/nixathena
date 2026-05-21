@@ -1,8 +1,15 @@
-{ stdenv, pkgs, lib, fetchFromGitHub, pkg-config, }:
+{
+  stdenv,
+  pkgs,
+  lib,
+  fetchFromGitHub,
+  pkg-config,
+}:
 
 let
   fs = lib.fileset;
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   pname = "debathena-aclocal";
   version = "1.1.4";
 
@@ -14,9 +21,9 @@ in stdenv.mkDerivation {
   };
 
   buildPhase = ''
-  mkdir $out
-  mkdir $out/share
-  cp -r aclocal $out/share/aclocal
+    mkdir $out
+    mkdir $out/share
+    cp -r aclocal $out/share/aclocal
   '';
 
   meta = with lib; {

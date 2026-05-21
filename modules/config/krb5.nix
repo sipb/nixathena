@@ -1,9 +1,14 @@
-{ lib, pkgs, config, options, ...
+{
+  lib,
+  pkgs,
+  config,
+  options,
+  ...
 }:
 
 {
-   options.nixathena.config.krb5.enable = lib.mkEnableOption "Configure Kerberos for ATHENA.MIT.EDU";
-   config = lib.mkIf config.nixathena.config.krb5.enable {
+  options.nixathena.config.krb5.enable = lib.mkEnableOption "Configure Kerberos for ATHENA.MIT.EDU";
+  config = lib.mkIf config.nixathena.config.krb5.enable {
     security.krb5 = {
       enable = true;
       settings = {

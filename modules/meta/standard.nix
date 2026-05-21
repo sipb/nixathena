@@ -1,4 +1,9 @@
-{ lib, pkgs, config, options, ...
+{
+  lib,
+  pkgs,
+  config,
+  options,
+  ...
 }:
 
 let
@@ -16,18 +21,21 @@ in
     ../services/pyhesiodfs.nix
   ];
 
-  options.nixathena.meta.standard = (let
-    mkOption = lib.mkOption;
-    mkEnableOption = lib.mkEnableOption;
-    types = lib.types;
-  in {
-    enable = mkEnableOption "Nixathena standard";
-    packages = mkOption {
-      description = "list of packages to install";
-      default = defaultPackages;
-      type = types.listOf types.package;
-    };
-  });
+  options.nixathena.meta.standard = (
+    let
+      mkOption = lib.mkOption;
+      mkEnableOption = lib.mkEnableOption;
+      types = lib.types;
+    in
+    {
+      enable = mkEnableOption "Nixathena standard";
+      packages = mkOption {
+        description = "list of packages to install";
+        default = defaultPackages;
+        type = types.listOf types.package;
+      };
+    }
+  );
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = cfg.packages;

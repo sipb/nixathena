@@ -1,12 +1,23 @@
-{ stdenv, pkgs, lib,
-  fetchFromGitHub, autoreconfHook, pkg-config,
-  libkrb5, openafs, readline, ncurses, openssl, termcap,
+{
+  stdenv,
+  pkgs,
+  lib,
+  fetchFromGitHub,
+  autoreconfHook,
+  pkg-config,
+  libkrb5,
+  openafs,
+  readline,
+  ncurses,
+  openssl,
+  termcap,
   hesiod,
 }:
 
 let
   fs = lib.fileset;
-in stdenv.mkDerivation rec {
+in
+stdenv.mkDerivation rec {
   pname = "moira";
   version = "4.2.4.0";
 
@@ -49,11 +60,17 @@ in stdenv.mkDerivation rec {
   # just assume that the object files are $(TARGET).o -- note that e.g.
   # `blanche` already looks like this, so there's inconsistency between files.
   patchPhase = ''
-  sed -ie 's#$(LDFLAGS) $@.o $(LIBS)#$(LDFLAGS) $(OBJS) $(LIBS)#' clients/*/Makefile.in
+    sed -ie 's#$(LDFLAGS) $@.o $(LIBS)#$(LDFLAGS) $(OBJS) $(LIBS)#' clients/*/Makefile.in
   '';
 
   #configureFlags = ["--without-krb4" "--with-krb5" "--with-zephyr"];
   configureFlags = [
-    "--without-krb4" "--with-krb5" "--without-zephyr" "--with-hesiod" "--with-afs" "--with-readline" "--with-com_err=${libkrb5.out}"
+    "--without-krb4"
+    "--with-krb5"
+    "--without-zephyr"
+    "--with-hesiod"
+    "--with-afs"
+    "--with-readline"
+    "--with-com_err=${libkrb5.out}"
   ];
 }

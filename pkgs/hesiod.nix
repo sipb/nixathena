@@ -1,5 +1,12 @@
-{ stdenv, pkgs, lib, fetchFromGitHub,
-  autoreconfHook, autoconf, automake, pkg-config,
+{
+  stdenv,
+  pkgs,
+  lib,
+  fetchFromGitHub,
+  autoreconfHook,
+  autoconf,
+  automake,
+  pkg-config,
   libidn,
 }:
 

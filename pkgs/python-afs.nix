@@ -1,11 +1,20 @@
-{ stdenv, pkgs, lib, fetchFromGitHub,
-  cython, python, buildPythonPackage, setuptools,
-  openafs, libkrb5,
+{
+  stdenv,
+  pkgs,
+  lib,
+  fetchFromGitHub,
+  cython,
+  python,
+  buildPythonPackage,
+  setuptools,
+  openafs,
+  libkrb5,
 }:
 
 let
   fs = lib.fileset;
-in buildPythonPackage {
+in
+buildPythonPackage {
   pname = "python-afs";
   version = "0.2.2";
 
@@ -51,7 +60,7 @@ in buildPythonPackage {
     # for OpenAFS at the start of the compiler command, so the relative order
     # among the system section is correct.
 
-    NIX_CFLAGS_COMPILE="-isystem${openafs.dev}/include -isystem${python}/include/python${python.pythonVersion}";
+    NIX_CFLAGS_COMPILE = "-isystem${openafs.dev}/include -isystem${python}/include/python${python.pythonVersion}";
     #NIX_DEBUG="1";
   };
 
