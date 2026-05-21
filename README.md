@@ -1,5 +1,9 @@
 # Nixathena
 
+This is a fork of adenhert's Nixathena project to add support for Athena workstations, which is used by the [SIPB Chromebox](https://forgejo.mit.edu/SIPB/chromebox). Just add this flake to your Nix config and now you have an Athena workstation! It may take up to two minutes to log in, hmmm maybe we should debug this...
+
+Original README:
+
 This is Nixathena, a vague start at a package repo for using MIT Athena on [NixOS](https://nixos.org/), inspired by [Debathena](https://debathena.mit.edu/).
 
 Eventually I may [add it](https://github.com/nix-community/NUR#how-to-add-your-own-repository) as a [Nix User Repository](https://github.com/nix-community/NUR) (and have used that template), but I don't think it's stable enough for that yet.

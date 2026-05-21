@@ -21,6 +21,7 @@ in
   pyhesiodfs = callPackage ./pyhesiodfs.nix { };
   remctl = callPackage ./remctl.nix { };
   moira = callPackage ./moira.nix { };
+  pam-afs-session = callPackage ./pam-afs-session.nix { };
   # https://ryantm.github.io/nixpkgs/builders/images/dockertools/
 #   docker = pkgs.dockerTools.buildLayeredImage {
 #     name = "${dockerName}";
