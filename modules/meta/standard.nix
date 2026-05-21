@@ -84,6 +84,7 @@ in
     systemd.services.athena-zhm = {
       description = "Zephyr host manager";
       after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "simple";
