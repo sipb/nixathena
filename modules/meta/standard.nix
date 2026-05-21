@@ -87,7 +87,7 @@ in
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${lib.getBin pkgs.athena.zephyr}/bin/zhm -n -f";
+        ExecStart = "${lib.getBin athena-pkgs.zephyr}/bin/zhm -n -f";
       };
     };
   };
