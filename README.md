@@ -2,6 +2,10 @@
 
 This is a fork of adenhert's Nixathena project to add support for Athena workstations, which is used by the [SIPB Chromebox](https://forgejo.mit.edu/SIPB/chromebox). Just add this flake to your Nix config and now you have an Athena workstation! It may take up to two minutes to log in, hmmm maybe we should debug this...
 
+Packaged so far: `attach`/`add` (Python implementation, not the original C), debathena-lightdm-greeter, moira, remctl, zephyr
+
+TODO: barnowl
+
 Original README:
 
 This is Nixathena, a vague start at a package repo for using MIT Athena on [NixOS](https://nixos.org/), inspired by [Debathena](https://debathena.mit.edu/).

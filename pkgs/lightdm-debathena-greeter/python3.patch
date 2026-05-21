@@ -1,5 +1,5 @@
 diff --git a/debian/debathena-lightdm-greeter b/debian/debathena-lightdm-greeter
-index 20bba64..8a8c8f5 100755
+index 20bba64..10a11d9 100755
 --- a/debian/debathena-lightdm-greeter
 +++ b/debian/debathena-lightdm-greeter
 @@ -17,7 +17,7 @@ import pwd
@@ -34,6 +34,17 @@ index 20bba64..8a8c8f5 100755
              sys.exit(-1)
  
          # This is just ridiculous.  Due to a GtkBuilder bug, it scribbles over
+@@ -199,8 +199,8 @@ class DebathenaGreeter:
+         self.winLogin.show()
+         self.initBackgroundWindow()
+         self.initBrandingWindow()
+-        self.afsMonitor = Gio.File.new_for_path("/afs/athena").monitor_directory(Gio.FileMonitorFlags.WATCH_MOUNTS, None)
+-        self.afsAvailable = os.path.isdir("/afs/athena")
++        self.afsMonitor = Gio.File.new_for_path("/afs/athena.mit.edu").monitor_directory(Gio.FileMonitorFlags.WATCH_MOUNTS, None)
++        self.afsAvailable = os.path.isdir("/afs/athena.mit.edu")
+         self.afsMonitor.connect("changed", self.afsStatusChanged)
+         self.initMotdWindow()
+         # Connect Gtk+ signal handlers
 @@ -223,6 +223,7 @@ class DebathenaGreeter:
  
          if not os.path.exists(KIOSK_LAUNCH_CMD):
