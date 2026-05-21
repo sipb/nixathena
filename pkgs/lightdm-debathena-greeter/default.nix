@@ -1,6 +1,5 @@
 {
   lib,
-  python3,
   python3Packages,
   fetchFromGitHub,
   linkFarm,
@@ -48,13 +47,16 @@ python3Packages.buildPythonApplication rec {
     cd debian
   '';
 
-  # This is gross
   installPhase = ''
     mkdir -p $out/bin $out/etc $out/share/xgreeters $out/share/debathena-lightdm-greeter
     cp debathena-lightdm-greeter $out/bin
     cp debathena-lightdm-greeter.ini $out/etc
     cp debathena-lightdm-greeter.desktop $out/share/xgreeters
     cp debathena-lightdm-greeter.ui background.jpg debathena*.png $out/share/debathena-lightdm-greeter
+    runHook postInstall
+  '';
+
+  postInstall = ''
     substituteInPlace "$out/etc/debathena-lightdm-greeter.ini" \
       --replace-fail "/usr/share/debathena-lightdm-config" "$out/share/debathena-lightdm-greeter"
     substituteInPlace "$out/bin/debathena-lightdm-greeter" \
@@ -75,5 +77,6 @@ python3Packages.buildPythonApplication rec {
     description = "LightDM greeter for Debathena";
     homepage = "https://github.com/mit-athena/lightdm-config";
     platforms = lib.platforms.linux;
+    license = lib.licenses.mit;
   };
 }

@@ -69,6 +69,7 @@ in
     };
     # LightDM greeter
     # It may just show a black screen if AFS hangs
+    # TODO: Figure out why that happens with nixos-rebuild build-vm
     services.xserver.displayManager.lightdm =
       lib.mkIf config.services.xserver.displayManager.lightdm.enable
         {

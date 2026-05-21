@@ -32,7 +32,7 @@
           };
           # This is what should actually get run
           test = {
-            # `nix run '.#test.meta-standard'` to run this test
+            # `nix run .#test.meta-standard` to run this test
             # It requires network (for hesiod and AFS access), so we can't run
             # it in `checks` and need to explicitly choose `.driver` -- the
             # default apparently blocks network.

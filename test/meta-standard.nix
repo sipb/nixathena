@@ -9,7 +9,7 @@ let
   nixathena = self.legacyPackages.${system};
 in
 
-pkgs.nixosTest {
+pkgs.testers.nixosTest {
   name = "meta-standard";
   nodes.machine =
     { config, pkgs, ... }:
