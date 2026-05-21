@@ -54,5 +54,6 @@ in
     python-discuss
     python-afs
     python-hesiod
+    locker-support
     ;
 }

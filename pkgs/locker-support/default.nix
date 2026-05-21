@@ -8,8 +8,6 @@
   python-hesiod,
 }:
 
-# TODO: Also install binaries
-
 let
   fs = lib.fileset;
 in
@@ -29,6 +27,10 @@ buildPythonPackage {
     setuptools
   ];
 
+  patches = [
+    ./python3.patch
+  ];
+
   dependencies = [
     python-afs
     python-hesiod
@@ -45,9 +47,13 @@ buildPythonPackage {
     "athdir"
   ];
 
-  #meta = with lib; {
-  #  description = "Python library for Project Athena forum system";
-  #  homepage = "https://github.com/mit-athena/python-discuss";
-  #  platforms = platforms.linux;
-  #};
+  meta = {
+    description = ''Python modules for Athena's "locker" framework'';
+    longDescription = ''
+      This package provides the "locker" and "athdir" modules, for use
+      with debathena-pyhesiodfs and more
+    '';
+    homepage = "https://github.com/mit-athena/locker-support";
+    license = lib.licenses.bsd3;
+  };
 }
