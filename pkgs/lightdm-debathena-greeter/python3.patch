@@ -1,5 +1,5 @@
 diff --git a/debian/debathena-lightdm-greeter b/debian/debathena-lightdm-greeter
-index 20bba64..b8d43f9 100755
+index 20bba64..8a8c8f5 100755
 --- a/debian/debathena-lightdm-greeter
 +++ b/debian/debathena-lightdm-greeter
 @@ -17,7 +17,7 @@ import pwd
@@ -122,7 +122,31 @@ index 20bba64..b8d43f9 100755
                  return False
          # Eyes come open.
          for pixbuf in self.logo_pixbufs[::-1]:
-@@ -730,10 +731,10 @@ if __name__ == '__main__':
+@@ -709,16 +710,15 @@ class DebathenaGreeter:
+ 
+ 
+     def get_workstation_information(self):
++        self.metapackage = 'Nixathena'
++        self.baseos = '(unknown OS)'
+         try:
+-            self.metapackage = subprocess.Popen(["machtype", "-L"], stdout=subprocess.PIPE).communicate()[0].rstrip()
+-        except OSError:
+-            self.metapackage = '(unknown metapackage)'
+-        try:
+-            self.baseos = subprocess.Popen(["machtype", "-E"], stdout=subprocess.PIPE).communicate()[0].rstrip()
++            with open("/etc/os-release") as f:
++                for l in f.readlines():
++                    if l.startswith('PRETTY_NAME="') and l.endswith('"\n'):
++                        self.baseos = l.removeprefix('PRETTY_NAME="').removesuffix('"\n')
+         except OSError:
+-            self.baseos = '(unknown OS)'
+-
+-
++            pass
+ 
+ 
+ if __name__ == '__main__':
+@@ -730,10 +730,10 @@ if __name__ == '__main__':
      parser.add_option("--cfg", action="store", type="string",
                        default=CONFIG_FILE, dest="config_file")
      (options, args) = parser.parse_args()
