@@ -10,7 +10,7 @@
 # Borrowed from https://code.functor.systems/functor.systems/functorOS/src/branch/main/docs/raw.nix
 
 let
-   # evaluate our options
+  # evaluate our options
   eval = import (pkgs.path + "/nixos/lib/eval-config.nix") {
     inherit pkgs;
     system = pkgs.stdenv.hostPlatform.system;
