@@ -10,7 +10,9 @@ Packaged so far: `attach`/`add` (Python implementation, not the original C), deb
 
 ![Login screen](login.png)
 
-![Desktop](desktop.png)
+![XFCE desktop](xfce.png)
+
+![CDE](cde.png)
 
 ## Installation
 
