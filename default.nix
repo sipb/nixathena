@@ -22,8 +22,7 @@ let
   );
 in
 {
-  # The `lib`, `modules`, and `overlays` names are special
-  lib = import ./lib { inherit pkgs; }; # functions
+  # The `modules` and `overlays` names are special
   modules = import ./modules; # NixOS modules
   #overlays = import ./overlays; # nixpkgs overlays
   overlays = {
@@ -41,6 +40,7 @@ in
       remctl
       moira
       athena-python3
+      zephyr
     ]
   );
   inherit (athena-pkgs)
@@ -49,6 +49,7 @@ in
     pyhesiodfs
     remctl
     moira
+    zephyr
     ;
   inherit (athena-pkgs.python3Packages)
     python-discuss

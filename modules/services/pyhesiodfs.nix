@@ -12,16 +12,7 @@ let
   athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
-  options.services.pyhesiodfs = (
-    let
-      mkOption = lib.mkOption;
-      mkEnableOption = lib.mkEnableOption;
-      types = lib.types;
-    in
-    {
-      enable = mkEnableOption "pyhesiodfs";
-    }
-  );
+  options.services.pyhesiodfs.enable = lib.mkEnableOption "pyhesiodfs";
 
   config = lib.mkIf cfg.enable {
     users.groups.pyhesiodfs = { };

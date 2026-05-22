@@ -5,19 +5,14 @@
   system,
 }:
 
-let
-  nixathena = self.legacyPackages.${system};
-in
-
 pkgs.testers.nixosTest {
-  name = "meta-standard";
+  name = "meta";
   nodes.machine =
     { config, pkgs, ... }:
     {
       imports = [
-        nixathena.modules.options
+        self.nixosModules.default
       ];
-      nixathena.meta.standard.enable = true;
     };
 
   testScript = ''

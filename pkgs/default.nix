@@ -29,18 +29,6 @@ in
   lightdm-debathena-greeter = callPackage ./lightdm-debathena-greeter { };
   libkrb5-e2fs = callPackage ./libkrb5-e2fs.nix { };
   zephyr = callPackage ./zephyr.nix { };
-  # https://ryantm.github.io/nixpkgs/builders/images/dockertools/
-  #   docker = pkgs.dockerTools.buildLayeredImage {
-  #     name = "${dockerName}";
-  #     tag = "${dockerTag}";
-  #     config = {
-  #       # See https://github.com/opencontainers/image-spec/blob/main/config.md
-  #       # for semantics
-  #       Cmd = "${formationbot}/bin/discord-bot";
-  #       WorkingDir = "/config/";
-  #       Volumes = { "/config/" = { }; };
-  #     };
-  #   };
 }
 
 # Running `nix-build default.nix` will run the build and spit out a path
