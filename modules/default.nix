@@ -81,12 +81,15 @@ in
         # For running dynamically linked stufff
         nix-ld.enable = true;
       };
-      # This creates /bin/bash for better compatibility with Athena stuff
-      systemd.tmpfiles.rules = [
-        "L+ /bin/bash - - - - ${pkgs.bash}/bin/bash"
-      ];
-      # Alternatively we could use envfs but it doesn't seem to work with sshd
-      # services.envfs.enable = true;
+      # This creates /bin/* for better compatibility with Athena stuff
+      services.envfs.enable = true;
+      # We need to manually create /bin/bash because envfs doesn't work with sshd for some reason
+      # Based on https://github.com/NixOS/nixpkgs/blob/8261f6e94510101738ab45f0b877f2993c7fb069/nixos/modules/config/shells-environment.nix#L213
+      system.activationScripts.binsh = lib.stringAfter [ "stdio" ] ''
+        mkdir -m 0755 -p /bin
+        ln -sfn "${pkgs.bash}/bin/bash" /bin/.bash.tmp
+        mv /bin/.bash.tmp /bin/bash # atomically replace /bin/bash
+      '';
     })
   ];
 }
