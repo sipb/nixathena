@@ -39,13 +39,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.etc."hesiod.conf" = {
-      text = ''
+    environment.etc."hesiod.conf".text = ''
         lhs=${cfg.lhs}
         rhs=${cfg.rhs}
         classes=${cfg.classes}
       '';
-    };
 
     environment.systemPackages = [ athena-pkgs.hesiod ];
 

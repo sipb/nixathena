@@ -6,7 +6,7 @@
 }:
 
 {
-  options.nixathena.krb5.enable = lib.mkEnableOption "configure Kerberos for ATHENA.MIT.EDU";
+  options.nixathena.krb5.enable = lib.mkEnableOption "Kerberos for ATHENA.MIT.EDU";
   config = lib.mkIf config.nixathena.krb5.enable {
     security.krb5 = {
       enable = true;

@@ -22,6 +22,7 @@ in
   imports = [
     ./config/hesiod.nix
     ./config/krb5.nix
+    ./config/ldap.nix
     ./config/lightdm.nix
     ./config/pam-afs-session.nix
     ./config/zephyr.nix
@@ -54,10 +55,12 @@ in
     (lib.mkIf cfg.workstation {
       nixathena = {
         hesiod.enable = lib.mkDefault true;
-        pam-afs-session.enable = lib.mkDefault true; # Get AFS token on login
+        ldap.enable = lib.mkDefault true;
         lightdm.enable = lib.mkDefault true;
+        pam-afs-session.enable = lib.mkDefault true; # Get AFS token on login
         zephyr.enable = lib.mkDefault true;
       };
+      # TODO: Move some of this stuff into ./config
       # Athena env vars
       # This is what the dialups use
       environment.variables = {
@@ -85,7 +88,12 @@ in
       services.envfs = {
         enable = true;
         # We need special handling for /bin/bash because envfs doesn't work with sshd for some reason
-        extraFallbackPathCommands = "ln -s ${pkgs.bash}/bin/bash $out/bash";
+        # Some people have the shell /bin/athena/bash for some reason??
+        extraFallbackPathCommands = ''
+          mkdir $out/athena
+          ln -s ${pkgs.bash}/bin/bash $out/bash
+          ln -s ${pkgs.bash}/bin/bash $out/athena/bash
+        '';
       };
     })
   ];
