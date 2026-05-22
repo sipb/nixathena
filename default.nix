@@ -41,6 +41,8 @@ in
       moira
       athena-python3
       zephyr
+      barnowl
+      athrun
     ]
   );
   inherit (athena-pkgs)
@@ -50,6 +52,8 @@ in
     remctl
     moira
     zephyr
+    barnowl
+    athrun
     ;
   inherit (athena-pkgs.python3Packages)
     python-discuss

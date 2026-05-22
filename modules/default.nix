@@ -14,6 +14,8 @@ let
     athena-pkgs.moira
     athena-pkgs.zephyr
     athena-pkgs.python3Packages.locker-support
+    athena-pkgs.barnowl
+    athena-pkgs.athrun
   ];
 in
 {

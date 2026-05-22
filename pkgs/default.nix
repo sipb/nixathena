@@ -29,6 +29,8 @@ in
   lightdm-debathena-greeter = callPackage ./lightdm-debathena-greeter { };
   libkrb5-e2fs = callPackage ./libkrb5-e2fs.nix { };
   zephyr = callPackage ./zephyr.nix { };
+  barnowl = callPackage ./barnowl.nix { };
+  athrun = callPackage ./athrun.nix { };
 }
 
 # Running `nix-build default.nix` will run the build and spit out a path
