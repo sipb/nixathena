@@ -8,11 +8,8 @@
     let
       systems = [
         "x86_64-linux"
-        "i686-linux"
         "x86_64-darwin"
         "aarch64-linux"
-        "armv6l-linux"
-        "armv7l-linux"
       ];
       forAllSystems =
         f:
@@ -42,6 +39,12 @@
             # it in `checks` and need to explicitly choose `.driver` -- the
             # default apparently blocks network.
             meta = test-infra.metaTest.driver;
+          };
+          docs-rendered = pkgs.callPackage ./docs/rendered.nix {
+            docs-raw = pkgs.callPackage ./docs/raw.nix {
+              hash = if (self ? rev) then self.rev else "placeholder_hash";
+            };
+            title = "Nixathena module options for ${if (self ? rev) then self.rev else "placeholder_hash"}";
           };
         }
       );
