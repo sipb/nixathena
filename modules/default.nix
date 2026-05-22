@@ -82,7 +82,11 @@ in
         nix-ld.enable = true;
       };
       # This creates /bin/bash for better compatibility with Athena stuff
-      services.envfs.enable = true;
+      systemd.tmpfiles.rules = [
+        "L+ /bin/bash - - - - ${pkgs.bash}/bin/bash"
+      ];
+      # Alternatively we could use envfs but it doesn't seem to work with sshd
+      # services.envfs.enable = true;
     })
   ];
 }
