@@ -10,7 +10,7 @@ TODO: barnowl
 
 To run apps from this repo without installing anything, for instance Moira, just run `nix run git+https://forgejo.mit.edu/SIPB/nixathena.git#moira`.
 
-Nixathena only officially support flakes. First, add this as a flake input:
+Nixathena officially only supports flakes. First, add this as a flake input:
 
 ```nix
 nixathena = {
