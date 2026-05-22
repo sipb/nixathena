@@ -8,11 +8,11 @@ Packaged so far: `attach`/`add` (Python implementation, not the original C), deb
 
 ## Screenshots
 
-![Login screen](login.png)
+![LightDM login screen](img/login.png)
 
-![XFCE desktop](xfce.png)
+![XFCE desktop](img/xfce.png)
 
-![CDE](cde.png)
+![CDE](img/cde.png)
 
 ## Installation
 
