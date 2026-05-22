@@ -1,8 +1,18 @@
 diff --git a/debian/debathena-lightdm-greeter b/debian/debathena-lightdm-greeter
-index 20bba64..10a11d9 100755
+index 20bba64..2678191 100755
 --- a/debian/debathena-lightdm-greeter
 +++ b/debian/debathena-lightdm-greeter
-@@ -17,7 +17,7 @@ import pwd
+@@ -1,6 +1,9 @@
+ #!/usr/bin/env python
+ #
+ 
++import gi
++gi.require_version('Gtk', '3.0')
++gi.require_version('LightDM', '1')
+ from gi.repository import GObject
+ from gi.repository import GLib
+ from gi.repository import Gio
+@@ -17,7 +20,7 @@ import pwd
  import time
  import os.path
  from optparse import OptionParser
@@ -11,7 +21,7 @@ index 20bba64..10a11d9 100755
  import io
  LD_NAME = 'org.freedesktop.login1'
  LD_MANAGER_PATH = '/org/freedesktop/login1'
-@@ -49,9 +49,9 @@ class DebathenaGreeter:
+@@ -49,9 +52,9 @@ class DebathenaGreeter:
      def _debug(self, *args):
          if self.debugMode:
              if type(args[0]) is str and len(args) > 1:
@@ -23,7 +33,28 @@ index 20bba64..10a11d9 100755
  
      def __init__(self, options, config):
          self.debugMode = options.debug
-@@ -142,8 +142,8 @@ class DebathenaGreeter:
+@@ -102,7 +105,7 @@ class DebathenaGreeter:
+                              self.cbAuthenticationComplete)
+         self.greeter.connect("show-message", self.cbShowMessage)
+         self.greeter.connect("show-prompt", self.cbShowPrompt)
+-        self.greeter.connect_sync()
++        self.greeter.connect_to_daemon_sync()
+ 
+         # Gtk signal handlers
+         handlers = {
+@@ -130,9 +133,9 @@ class DebathenaGreeter:
+         self.beingCancelled=False
+  
+         # Save the screen size for various window operations
+-        defaultScreen = Gdk.Screen.get_default()
++        defaultScreen = Gdk.Display.get_default()
+         # Kids these days have too many monitors
+-        self.monitorGeometry = defaultScreen.get_monitor_geometry(defaultScreen.get_primary_monitor())
++        self.monitorGeometry = defaultScreen.get_primary_monitor().get_geometry()
+         # Don't use this for window centering calculations
+         self.screenSize = (self.monitorGeometry.x + self.monitorGeometry.width,
+                            self.monitorGeometry.y + self.monitorGeometry.height)
+@@ -142,8 +145,8 @@ class DebathenaGreeter:
          self.builder = Gtk.Builder()
          try: 
              self.builder.add_from_file(options.ui_file)
@@ -34,18 +65,19 @@ index 20bba64..10a11d9 100755
              sys.exit(-1)
  
          # This is just ridiculous.  Due to a GtkBuilder bug, it scribbles over
-@@ -199,8 +199,8 @@ class DebathenaGreeter:
+@@ -199,8 +202,9 @@ class DebathenaGreeter:
          self.winLogin.show()
          self.initBackgroundWindow()
          self.initBrandingWindow()
 -        self.afsMonitor = Gio.File.new_for_path("/afs/athena").monitor_directory(Gio.FileMonitorFlags.WATCH_MOUNTS, None)
 -        self.afsAvailable = os.path.isdir("/afs/athena")
++        # TODO: Originally the code here used "/afs/athena" instead but this seems to work better?
 +        self.afsMonitor = Gio.File.new_for_path("/afs/athena.mit.edu").monitor_directory(Gio.FileMonitorFlags.WATCH_MOUNTS, None)
 +        self.afsAvailable = os.path.isdir("/afs/athena.mit.edu")
          self.afsMonitor.connect("changed", self.afsStatusChanged)
          self.initMotdWindow()
          # Connect Gtk+ signal handlers
-@@ -223,6 +223,7 @@ class DebathenaGreeter:
+@@ -223,6 +227,7 @@ class DebathenaGreeter:
  
          if not os.path.exists(KIOSK_LAUNCH_CMD):
              self.builder.get_object("mnuBrowse").hide()
@@ -53,7 +85,7 @@ index 20bba64..10a11d9 100755
          # Setup the login window for first login
          self.resetLoginWindow()
  
-@@ -235,11 +236,11 @@ class DebathenaGreeter:
+@@ -235,11 +240,11 @@ class DebathenaGreeter:
                  if codename and os.path.exists(self.motdFilename + "." + codename.strip()):
                      self.motdFilename += "." + codename.strip()
              except OSError:
@@ -68,7 +100,7 @@ index 20bba64..10a11d9 100755
          motdTxt = ''
          # Avoid huge files messing up the greeter
          # At most 10 lines of 80 characters per line
-@@ -272,8 +273,8 @@ class DebathenaGreeter:
+@@ -272,8 +277,8 @@ class DebathenaGreeter:
          try:
              bg_pixbuf = GdkPixbuf.Pixbuf.new_from_file(self.backgroundImageFile)
              bg_scaled = bg_pixbuf.scale_simple(self.screenSize[0], self.screenSize[1], GdkPixbuf.InterpType.BILINEAR)
@@ -79,7 +111,7 @@ index 20bba64..10a11d9 100755
              # Just a plain black background
              bg_scaled = GdkPixbuf.Pixbuf.new(GdkPixbuf.Colorspace.RGB, False, 8, self.screenSize[0], self.screenSize[1])
          self.imgBg.set_from_pixbuf(bg_scaled)
-@@ -335,8 +336,8 @@ class DebathenaGreeter:
+@@ -335,8 +340,8 @@ class DebathenaGreeter:
              actions[widget.get_name()]()
          except KeyError:
              # "won't" happen
@@ -90,7 +122,7 @@ index 20bba64..10a11d9 100755
              # It's possible we should look at the error text to see if
              # it's ConsoleKit that's whining?  Because you get a
              # (valid) error from UPower if you try to suspend when
-@@ -357,10 +358,10 @@ class DebathenaGreeter:
+@@ -357,10 +362,10 @@ class DebathenaGreeter:
                  self.onboardProc = subprocess.Popen([PICKBOARD_CMD, "--xid"],
                                                  stdout=subprocess.PIPE)
                  xid = int(self.onboardProc.stdout.readline())
@@ -104,7 +136,7 @@ index 20bba64..10a11d9 100755
                  self.onboardProc.kill()
  
              if self.onboardProc is None or xid is None:
-@@ -474,7 +475,7 @@ class DebathenaGreeter:
+@@ -474,7 +479,7 @@ class DebathenaGreeter:
              self._debug("User has selected '%s' session" % (session_name))
              if not greeter.start_session_sync(session_name):
                  self._debug("Failed to start session")
@@ -113,7 +145,7 @@ index 20bba64..10a11d9 100755
          elif not self.beingCancelled:
              self._debug("Authentication failed.")
              self.displayMessage("Authentication failed, please try again")
-@@ -600,7 +601,7 @@ class DebathenaGreeter:
+@@ -600,7 +605,7 @@ class DebathenaGreeter:
                                       LD_MANAGER_IFACE)
          except dbus.exceptions.DBusException as e:
              if e.get_dbus_name() != "org.freedesktop.DBus.Error.ServiceUnknown":
@@ -122,7 +154,7 @@ index 20bba64..10a11d9 100755
              return None
          sessions = manager.ListSessions()
          target_sessions = {}
-@@ -681,8 +682,8 @@ class DebathenaGreeter:
+@@ -681,8 +686,8 @@ class DebathenaGreeter:
                  pixbuf = GdkPixbuf.Pixbuf.new_from_file(img)
                  self.logo_pixbufs.append(pixbuf.scale_simple(int(pixbuf.get_width() * logoScale), int(pixbuf.get_height() * logoScale), GdkPixbuf.InterpType.BILINEAR))
                  num_pixbufs += 1
@@ -133,7 +165,7 @@ index 20bba64..10a11d9 100755
                  return False
          # Eyes come open.
          for pixbuf in self.logo_pixbufs[::-1]:
-@@ -709,16 +710,15 @@ class DebathenaGreeter:
+@@ -709,14 +714,15 @@ class DebathenaGreeter:
  
  
      def get_workstation_information(self):
@@ -151,13 +183,11 @@ index 20bba64..10a11d9 100755
 +                        self.baseos = l.removeprefix('PRETTY_NAME="').removesuffix('"\n')
          except OSError:
 -            self.baseos = '(unknown OS)'
--
--
 +            pass
  
  
- if __name__ == '__main__':
-@@ -730,10 +730,10 @@ if __name__ == '__main__':
+ 
+@@ -730,17 +736,17 @@ if __name__ == '__main__':
      parser.add_option("--cfg", action="store", type="string",
                        default=CONFIG_FILE, dest="config_file")
      (options, args) = parser.parse_args()
@@ -169,4 +199,14 @@ index 20bba64..10a11d9 100755
 +    config.read_file(io.StringIO("[Greeter]\n"))
      config.read(options.config_file)
      Gtk.init(None);
-     main_loop = GObject.MainLoop ()
+-    main_loop = GObject.MainLoop ()
++    main_loop = GLib.MainLoop ()
+     dagreeter = DebathenaGreeter(options, config)
+     # Add a timeout for the owl animation
+-    GObject.timeout_add(50, dagreeter.update_owl)
++    GLib.timeout_add(50, dagreeter.update_owl)
+     # Add a timeout for the clock in the panel
+-    GObject.timeout_add(30, dagreeter.updateTime)
++    GLib.timeout_add(30, dagreeter.updateTime)
+ 
+     main_loop.run ()

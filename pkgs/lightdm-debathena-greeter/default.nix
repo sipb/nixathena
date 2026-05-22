@@ -9,6 +9,7 @@
   gobject-introspection,
   lightdm,
   lightdm-debathena-greeter,
+  onboard,
 }:
 
 # Based on https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/li/lightdm-slick-greeter/package.nix
@@ -34,6 +35,7 @@ python3Packages.buildPythonApplication rec {
   buildInputs = [
     gtk3
     lightdm
+    onboard
   ];
 
   propagatedBuildInputs = with python3Packages; [
@@ -68,13 +70,14 @@ python3Packages.buildPythonApplication rec {
   '';
 
   postInstall = ''
-    substituteInPlace "$out/etc/debathena-lightdm-greeter.ini" \
-      --replace-fail "/usr/share/debathena-lightdm-config" "$out/share/debathena-lightdm-greeter"
-    substituteInPlace "$out/bin/debathena-lightdm-greeter" \
-      --replace-fail "/usr/share/debathena-lightdm-config" "$out/share/debathena-lightdm-greeter" \
-      --replace-fail "/etc/debathena-lightdm-greeter.ini" "$out/etc/debathena-lightdm-greeter.ini"
-    substituteInPlace "$out/share/xgreeters/debathena-lightdm-greeter.desktop" \
-      --replace-fail "Exec=/usr/lib/debathena-lightdm-config/debathena-lightdm-greeter" "Exec=$out/bin/debathena-lightdm-greeter"
+    substituteInPlace $out/etc/debathena-lightdm-greeter.ini \
+      --replace-fail /usr/share/debathena-lightdm-config $out/share/debathena-lightdm-greeter
+    substituteInPlace $out/bin/debathena-lightdm-greeter \
+      --replace-fail /usr/share/debathena-lightdm-config $out/share/debathena-lightdm-greeter \
+      --replace-fail /etc/debathena-lightdm-greeter.ini $out/etc/debathena-lightdm-greeter.ini \
+      --replace-fail /usr/bin/onboard ${onboard}/bin/onboard
+    substituteInPlace $out/share/xgreeters/debathena-lightdm-greeter.desktop \
+      --replace-fail Exec=/usr/lib/debathena-lightdm-config/debathena-lightdm-greeter Exec=$out/bin/debathena-lightdm-greeter
   '';
 
   passthru.xgreeters = linkFarm "debathena-greeter-xgreeters" [
