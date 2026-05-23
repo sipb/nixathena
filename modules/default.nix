@@ -26,7 +26,9 @@ in
     ./config/lightdm.nix
     ./config/pam-afs-session.nix
     ./config/zephyr.nix
+    ./services/discussd.nix
     ./services/pyhesiodfs.nix
+    ./services/remctld.nix
   ];
 
   options.nixathena = {

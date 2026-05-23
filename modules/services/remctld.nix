@@ -8,11 +8,11 @@
   ...
 }:
 let
-  cfg = config.services.remctld;
+  cfg = config.nixathena.remctld;
   athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
-  options.services.remctld = (
+  options.nixathena.remctld = (
     let
       mkOption = lib.mkOption;
       mkEnableOption = lib.mkEnableOption;

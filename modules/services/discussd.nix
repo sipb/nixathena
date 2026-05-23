@@ -6,11 +6,11 @@
   ...
 }:
 let
-  cfg = config.services.discussd;
+  cfg = config.nixathena.discussd;
   athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
-  options.services.discussd = (
+  options.nixathena.discussd = (
     let
       mkOption = lib.mkOption;
       mkEnableOption = lib.mkEnableOption;

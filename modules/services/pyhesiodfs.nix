@@ -8,11 +8,11 @@
   ...
 }:
 let
-  cfg = config.services.pyhesiodfs;
+  cfg = config.nixathena.pyhesiodfs;
   athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
-  options.services.pyhesiodfs.enable = lib.mkEnableOption "pyhesiodfs" // {
+  options.nixathena.pyhesiodfs.enable = lib.mkEnableOption "pyhesiodfs" // {
     default = true;
   };
 
