@@ -11,7 +11,10 @@ let
 in
 {
   options.nixathena.hesiod = {
-    enable = lib.mkEnableOption "Hesiod client library";
+    enable = lib.mkEnableOption "Hesiod client library" // {
+      default = config.nixathena.workstation;
+      defaultText = lib.literalExpression "config.nixathena.workstation";
+    };
 
     lhs = lib.mkOption {
       description = "Domain prefix used for Hesiod queries.";

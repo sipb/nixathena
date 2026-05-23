@@ -9,7 +9,10 @@ let
   athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
-  options.nixathena.lightdm.enable = lib.mkEnableOption "LightDM";
+  options.nixathena.lightdm.enable = lib.mkEnableOption "LightDM" // {
+    default = config.nixathena.workstation;
+    defaultText = lib.literalExpression "config.nixathena.workstation";
+  };
 
   config = lib.mkIf config.nixathena.lightdm.enable {
     # The Debathena greeter may just show a black screen if AFS hangs

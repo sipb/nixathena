@@ -9,7 +9,10 @@ let
   athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
-  options.nixathena.zephyr.enable = lib.mkEnableOption "Zephyr";
+  options.nixathena.zephyr.enable = lib.mkEnableOption "Zephyr" // {
+    default = config.nixathena.workstation;
+    defaultText = lib.literalExpression "config.nixathena.workstation";
+  };
 
   config = lib.mkIf config.nixathena.zephyr.enable {
     # From https://github.com/andersk/nixathena/blob/main/modules/zephyr-client.nix

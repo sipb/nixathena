@@ -6,7 +6,10 @@
 }:
 
 {
-  options.nixathena.ldap.enable = lib.mkEnableOption "LDAP for MIT";
+  options.nixathena.ldap.enable = lib.mkEnableOption "LDAP for MIT" // {
+    default = config.nixathena.workstation;
+    defaultText = lib.literalExpression "config.nixathena.workstation";
+  };
   config = lib.mkIf config.nixathena.ldap.enable {
     environment = {
       systemPackages = [ pkgs.openldap ];

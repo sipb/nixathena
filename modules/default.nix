@@ -49,21 +49,12 @@ in
   config = lib.mkMerge [
     {
       environment.systemPackages = cfg.packages;
-      services.pyhesiodfs.enable = lib.mkDefault true;
       services.openafsClient = {
         enable = lib.mkDefault true;
         cellName = lib.mkDefault "athena.mit.edu";
       };
-      nixathena.krb5.enable = lib.mkDefault true;
     }
     (lib.mkIf cfg.workstation {
-      nixathena = {
-        hesiod.enable = lib.mkDefault true;
-        ldap.enable = lib.mkDefault true;
-        lightdm.enable = lib.mkDefault true;
-        pam-afs-session.enable = lib.mkDefault true; # Get AFS token on login
-        zephyr.enable = lib.mkDefault true;
-      };
       # TODO: Move some of this stuff into ./config
       # Athena env vars
       # This is what the dialups use

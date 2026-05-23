@@ -6,7 +6,9 @@
 }:
 
 {
-  options.nixathena.krb5.enable = lib.mkEnableOption "Kerberos for ATHENA.MIT.EDU";
+  options.nixathena.krb5.enable = lib.mkEnableOption "Kerberos for ATHENA.MIT.EDU" // {
+    default = true;
+  };
   config = lib.mkIf config.nixathena.krb5.enable {
     security.krb5 = {
       enable = true;
@@ -30,6 +32,8 @@
         };
       };
     };
+    # Only allow Kerberos login on workstations
+    security.pam.krb5.enable = config.nixathena.workstation;
     programs.ssh.package = pkgs.opensshWithKerberos;
     services.openssh = {
       # You also need to get a keytab for the SSH server!

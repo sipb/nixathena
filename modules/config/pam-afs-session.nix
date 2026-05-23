@@ -9,7 +9,10 @@ let
   athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
-  options.nixathena.pam-afs-session.enable = lib.mkEnableOption "pam-afs-session";
+  options.nixathena.pam-afs-session.enable = lib.mkEnableOption "pam-afs-session" // {
+    default = config.nixathena.workstation;
+    defaultText = lib.literalExpression "config.nixathena.workstation";
+  };
 
   config = lib.mkIf config.nixathena.pam-afs-session.enable {
     # The Nix PAM config syntax is badly documented so see https://github.com/NixOS/nixpkgs/pull/255547
