@@ -4,7 +4,15 @@ Turn any computer into an Athena workstation running a modern OS (not Ubuntu 14.
 
 This is a fork of adenhert's Nixathena project to add support for Athena workstations, which is used by the [SIPB Chromebox](https://forgejo.mit.edu/SIPB/chromebox). Just add this flake to your NixOS config and now you have an Athena workstation! It may take up to two minutes to log in. Some of the features require your machine to be on MIT Ethernet.
 
-Packaged so far: `attach`/`add` (Python implementation, not the original C), debathena-lightdm-greeter, moira, remctl, zephyr, BarnOwl (was a huge PITA to package), athrun
+## Features
+
+- Run programs from lockers using `athrun`/`attach`/`add` (Python implementation, not the original C)
+- The original Debathena login screen
+- Moira
+- remctl and remctld
+- Zephyr and BarnOwl
+- SSH in using your Kerberos password or Kerberos tickets
+- Use AFS as your home directory via `pam-afs-session`
 
 See https://www.mit.edu/~xy/nixathena/ for config docs.
 

@@ -45,10 +45,10 @@ python3Packages.buildPythonApplication rec {
 
   extraFiles = ../../img;
   postUnpack = ''
-    rsvg-convert --zoom 0.4 "$extraFiles"/logo.svg -o source/debian/debathena.png
+    rsvg-convert --zoom 0.35 "$extraFiles"/logo.svg -o source/debian/debathena.png
     for i in {1..8}
     do
-      rsvg-convert --zoom 0.4 "$extraFiles"/logo$i.svg -o source/debian/debathena$i.png
+      rsvg-convert --zoom 0.35 "$extraFiles"/logo$i.svg -o source/debian/debathena$i.png
     done
   '';
 

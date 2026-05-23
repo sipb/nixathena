@@ -92,6 +92,11 @@ in
           ln -s ${pkgs.bash}/bin/bash $out/athena/bash
         '';
       };
+      # Allow running AppImages seamlessly
+      programs.appimage = {
+        enable = true;
+        binfmt = true;
+      };
     })
   ];
 }
