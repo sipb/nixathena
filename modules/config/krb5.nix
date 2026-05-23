@@ -30,5 +30,15 @@
         };
       };
     };
+    programs.ssh.package = pkgs.opensshWithKerberos;
+    services.openssh = {
+      # You also need to get a keytab for the SSH server!
+      # https://sipb.mit.edu/previously/doc/kerberized-server/
+      package = pkgs.opensshWithKerberos;
+      extraConfig = ''
+        GSSAPIAuthentication = yes
+        GSSAPICleanupCredentials yes
+      '';
+    };
   };
 }
