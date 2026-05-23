@@ -37,7 +37,7 @@ python3Packages.buildPythonApplication {
   '';
 
   meta = with lib; {
-    description = "TODO";
+    description = "Run a program from an Athena locker";
     homepage = "https://github.com/mit-athena/athrun";
     platforms = platforms.linux;
   };

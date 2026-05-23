@@ -2,9 +2,11 @@
 
 Turn any computer into an Athena workstation running a modern OS (not Ubuntu 14.04)!
 
-This is a fork of adenhert's Nixathena project to add support for Athena workstations, which is used by the [SIPB Chromebox](https://forgejo.mit.edu/SIPB/chromebox). Just add this flake to your NixOS config and now you have an Athena workstation! It may take up to two minutes to log in (TODO debug this). Some of the features require your machine to be on MIT Ethernet.
+This is a fork of adenhert's Nixathena project to add support for Athena workstations, which is used by the [SIPB Chromebox](https://forgejo.mit.edu/SIPB/chromebox). Just add this flake to your NixOS config and now you have an Athena workstation! It may take up to two minutes to log in. Some of the features require your machine to be on MIT Ethernet.
 
 Packaged so far: `attach`/`add` (Python implementation, not the original C), debathena-lightdm-greeter, moira, remctl, zephyr, BarnOwl (was a huge PITA to package), athrun
+
+See https://www.mit.edu/~xy/nixathena/ for config docs.
 
 ## Screenshots
 
@@ -14,11 +16,13 @@ Packaged so far: `attach`/`add` (Python implementation, not the original C), deb
 
 ![CDE](img/cde.png)
 
-## Installation
+## Usage
+
+Nixathena requires flakes to be enabled.
 
 To run apps from this repo without installing anything, for instance Moira, just run `nix run git+https://forgejo.mit.edu/SIPB/nixathena.git#moira`.
 
-Nixathena officially only supports flakes. First, add this as a flake input:
+To install all the Nixathena software, first add this repo as a flake input:
 
 ```nix
 nixathena = {
@@ -27,7 +31,7 @@ nixathena = {
 };
 ```
 
-Then, add it as a module:
+Then, add the default module:
 
 ```nix
 modules = [
@@ -38,3 +42,14 @@ modules = [
 ];
 ```
 
+## Development
+
+Run tests: `nix run .#test.meta`
+
+Build docs (must have a clean working tree): `nix build .#docs-rendered`
+
+## TODO
+
+- CI?
+- Binary cache?
+- Upstream our Python 3 patches?

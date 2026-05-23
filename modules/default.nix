@@ -31,7 +31,11 @@ in
 
   options.nixathena = {
     workstation = lib.mkOption {
-      description = "Whether to configure the computer as an Athena workstation and allow any Athena user to log in.";
+      description = ''
+        Whether to configure the computer as an Athena workstation and allow any Athena user to log in.
+
+        Note that if you have SSH enabled, then any Athena user will be able to SSH into your computer!
+      '';
       default = false;
       type = lib.types.bool;
     };
