@@ -15,6 +15,7 @@ Special thanks to adehnert, andersk, and all other Debathena contributors for ma
 - Zephyr and BarnOwl
 - SSH in using your Kerberos password or Kerberos tickets
 - Use AFS as your home directory via `pam-afs-session`
+- x86_64, aarch64, and i686 are all supported
 
 See https://www.mit.edu/~xy/nixathena/ for config docs.
 
@@ -56,6 +57,8 @@ modules = [
 
 Run tests: `nix run .#test.meta`
 
+TODO: How to run aarch64 tests on x86_64? (`nix run .#packages.aarch64-linux.test.meta` will run the qemu-system-aarch64 using qemu-user-static-aarch64 which is really slow)
+
 Build docs (must have a clean working tree): `nix build .#docs-rendered`
 
 ## TODO
@@ -63,3 +66,4 @@ Build docs (must have a clean working tree): `nix build .#docs-rendered`
 - CI?
 - Binary cache?
 - Upstream our Python 3 patches?
+- More tests

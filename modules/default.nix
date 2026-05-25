@@ -72,7 +72,8 @@ in
       };
       # Athena env vars
       # This is what the dialups use
-      # We set these by default because it's used by some software such as `attach`
+      # We set these by default, not just for workstations, because it's used by some software such as `attach`
+      # TODO: Set different vars for aarch64 and i686 (although for aarch64, I would be surprised if any lockers had software for it)
       environment.variables = {
         ATHENA_SYS = "amd64_ubuntu2204";
         ATHENA_SYS_COMPAT = "i386_ubuntu2204:amd64_ubuntu2004:i386_ubuntu2004:amd64_deb100:i386_deb100:amd64_ubuntu1804:i386_ubuntu1804:amd64_deb90:i386_deb90:amd64_ubuntu1604:i386_ubuntu1604:amd64_deb80:i386_deb80:amd64_ubuntu1404:i386_ubuntu1404:amd64_deb70:i386_deb70:amd64_ubuntu1204:i386_ubuntu1204:amd64_ubuntu1004:i386_ubuntu1004:amd64_ubuntu904:i386_ubuntu904:amd64_deb50:i386_deb50:amd64_ubuntu804:i386_ubuntu804:amd64_deb40:i386_deb40:i386_rhel4";
