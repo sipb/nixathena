@@ -169,7 +169,7 @@ index 20bba64..2678191 100755
  
  
      def get_workstation_information(self):
-+        self.metapackage = 'Nixathena'
++        self.metapackage = 'nixathena'
 +        self.baseos = '(unknown OS)'
          try:
 -            self.metapackage = subprocess.Popen(["machtype", "-L"], stdout=subprocess.PIPE).communicate()[0].rstrip()

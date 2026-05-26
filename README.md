@@ -63,7 +63,7 @@ Build docs (must have a clean working tree): `nix build .#docs-rendered`
 
 ## TODO
 
-- CI?
+- CI (run tests, generate and publish docs)
 - Binary cache?
-- Upstream our Python 3 patches?
+- Package more Athena software?
 - More tests
