@@ -48,9 +48,15 @@ Then, add the default module:
 modules = [
   [...]
   inputs.nixathena.nixosModules.default
-  # Uncomment the following line to get a workstation where anyone can log in
-  # { nixathena.workstation = true; }
 ];
+```
+
+Finally, enable Nixathena in your NixOS config:
+
+```nix
+nixathena.enable = true;
+# Uncomment this line to get a workstation where anyone can log in
+# nixathena.workstation = true;
 ```
 
 ## Development
