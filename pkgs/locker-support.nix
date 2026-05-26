@@ -21,7 +21,7 @@ buildPythonPackage {
     owner = "macathena";
     repo = "locker-support";
     rev = "3801013b44488dab81bcea2b72634ba9340a1499";
-    hash = "sha256-s/L6LbBcRdno1EFbTDeQg5CMV2uJLn7xaOQgpiFLOfQ=";
+    hash = "sha256-W/tQyjMATJw68uWW9x06mATzBU/4E5uViBxnaq8mG8I=";
   };
 
   pyproject = true;
