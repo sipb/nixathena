@@ -18,7 +18,7 @@ in
         python-discuss = callPackage ./python-discuss.nix { };
         python-afs = callPackage ./python-afs.nix { };
         python-hesiod = callPackage ./python-hesiod.nix { };
-        locker-support = callPackage ./locker-support { };
+        locker-support = callPackage ./locker-support.nix { };
       }
     )
   ];
