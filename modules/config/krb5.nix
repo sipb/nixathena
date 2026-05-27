@@ -15,6 +15,7 @@
       settings = {
         libdefaults = {
           default_realm = "ATHENA.MIT.EDU";
+          forwardable = true; # So you don't have to pass `-f` to `kinit`
         };
         domain_realm = {
           ".exchange.mit.edu" = "EXCHANGE.MIT.EDU";
