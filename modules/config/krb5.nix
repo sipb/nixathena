@@ -50,7 +50,7 @@
     programs.ssh.package = pkgs.opensshWithKerberos;
     services.openssh = {
       # You also need to get a keytab for the SSH server!
-      # https://sipb.mit.edu/previously/doc/kerberized-server/
+      # See docs/kerberized-server.md
       # https://www.kevindiaz.dev/blog/configuring-openssh-to-use-kerberos-authentication.html
       package = pkgs.opensshWithKerberos;
       extraConfig = ''
