@@ -5,10 +5,10 @@ If you want kerberized logins on a server you run, you'll need a *keytab* from a
 Your new keytab will be in `/mit/accounts/srvtabs/FOR_YOURUSERNAME`, which is AFS and vaguely insecure. You probably want to install it in `/etc/krb5.keytab`, and then set a new (random) key.
 
 ```bash
-# mv -f /etc/krb5.keytab /etc/krb5.keytab.old  # back up any keytab you already have
-# mv /mit/accounts/srvtabs/FOR_JOEUSER/joeserver-new-keytab /etc/krb5.keytab
-# k5srvutil change -e aes256-cts:normal,aes128-cts:normal # Only use secure ciphers
-# k5srvutil delold # Delete old keys
+mv -f /etc/krb5.keytab /etc/krb5.keytab.old  # back up any keytab you already have
+mv /mit/accounts/srvtabs/FOR_JOEUSER/joeserver-new-keytab /etc/krb5.keytab
+k5srvutil change -e aes256-cts:normal,aes128-cts:normal # Only use secure ciphers
+k5srvutil delold # Delete old keys
 ```
 
 Make sure your `/etc/ssh/sshd_config` file includes the line
