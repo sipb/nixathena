@@ -54,7 +54,6 @@
       package = pkgs.opensshWithKerberos;
       extraConfig = ''
         GSSAPIAuthentication yes
-        GSSAPICleanupCredentials yes
       '';
     };
   };
