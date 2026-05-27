@@ -30,6 +30,18 @@
           ".whoi.edu" = "ATHENA.MIT.EDU";
           "whoi.edu" = "ATHENA.MIT.EDU";
         };
+        # This is what the dialups use
+        realms."ATHENA.MIT.EDU" = {
+          admin_server = "kerberos.mit.edu";
+          master_kdc = "kerberos.mit.edu";
+          default_domain = "mit.edu";
+          kdc = [
+            "kerberos.mit.edu:88"
+            "kerberos-1.mit.edu:88"
+            "kerberos-2.mit.edu:88"
+            "kerberos-3.mit.edu:88"
+          ];
+        };
       };
     };
     # Only allow Kerberos login on workstations
@@ -38,9 +50,10 @@
     services.openssh = {
       # You also need to get a keytab for the SSH server!
       # https://sipb.mit.edu/previously/doc/kerberized-server/
+      # https://www.kevindiaz.dev/blog/configuring-openssh-to-use-kerberos-authentication.html
       package = pkgs.opensshWithKerberos;
       extraConfig = ''
-        GSSAPIAuthentication = yes
+        GSSAPIAuthentication yes
         GSSAPICleanupCredentials yes
       '';
     };
