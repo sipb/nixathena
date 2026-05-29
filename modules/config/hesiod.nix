@@ -41,6 +41,7 @@ in
     };
   };
 
+  # See https://nullroute.lt/~grawity/hesiod.html for some background info about Hesiod
   config = lib.mkIf cfg.enable {
     environment.etc."hesiod.conf".text = ''
       lhs=${cfg.lhs}
@@ -50,6 +51,7 @@ in
 
     environment.systemPackages = [ athena-pkgs.hesiod ];
 
+    # Hesiod comes built-in to glibc but apparently it's deprecated and might get removed in the future 😥
     system.nssDatabases = lib.mkIf cfg.nsswitch {
       passwd = [ "hesiod" ];
       group = [ "hesiod" ];

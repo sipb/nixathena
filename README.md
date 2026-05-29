@@ -2,7 +2,7 @@
 
 Turn any computer into an Athena workstation running a modern OS (not Ubuntu 14.04)!
 
-This is a fork of [adenhert's Nixathena repo](https://github.com/dehnert/nixathena) to add support for Athena workstations, which is used by the [SIPB Chromebox](https://forgejo.mit.edu/SIPB/chromebox). Just add this flake to your NixOS config and now you have an Athena workstation! It may take up to two minutes to log in. Some of the features require your machine to be on MIT Ethernet.
+This is a fork of [adenhert's Nixathena repo](https://github.com/dehnert/nixathena) to add support for Athena workstations, such as the [ones in the SIPB office](https://forgejo.mit.edu/SIPB/workstations). Just add this flake to your NixOS config and now you have an Athena workstation! Some of the features require your machine to be on MIT Ethernet.
 
 Special thanks to adehnert, andersk, and all other Debathena contributors for making this project possible!
 
@@ -72,4 +72,5 @@ Build docs (must have a clean working tree): `nix build .#docs-rendered`
 - CI (run tests, generate and publish docs)
 - Binary cache?
 - Package more Athena software?
+- Figure our why XFCE takes 2 minutes to log in
 - More tests

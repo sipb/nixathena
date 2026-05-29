@@ -90,6 +90,7 @@ in
           enable = true;
           # We need special handling for /bin/bash because envfs doesn't work with sshd for some reason
           # Some people have the shell /bin/athena/bash for some reason??
+          # I've also seen /bin/athena/tcsh in the wild 🙀️
           extraFallbackPathCommands = ''
             mkdir $out/athena
             ln -s ${pkgs.bash}/bin/bash $out/bash

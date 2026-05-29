@@ -15,8 +15,9 @@ in
   };
 
   config = lib.mkIf config.nixathena.lightdm.enable {
-    # The Debathena greeter may just show a black screen if AFS hangs
-    # Let's just hope that never happens...
+    # The Debathena greeter may show a black screen if AFS hangs, which often happens when you're using MIT Wi-Fi instead of Ethernet
+    # Let's just hope that never happens on the workstations...
+    # Anyways you can switch to a TTY if that happens
     services.xserver.displayManager.lightdm = {
       enable = true;
       greeter = lib.mkDefault {

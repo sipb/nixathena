@@ -17,6 +17,7 @@
           default_realm = "ATHENA.MIT.EDU";
           forwardable = true; # So you don't have to pass `-f` to `kinit`
         };
+        # The dialups have more domains listed but they're probably unnecessary for our purposes
         domain_realm = {
           ".exchange.mit.edu" = "EXCHANGE.MIT.EDU";
           "exchange.mit.edu" = "EXCHANGE.MIT.EDU";
