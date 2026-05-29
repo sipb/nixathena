@@ -83,6 +83,8 @@ in
         };
       }
       (lib.mkIf cfg.workstation {
+        # We need this for Kerberos login
+        networking.domain = "mit.edu";
         # For running dynamically linked stufff
         programs.nix-ld.enable = true;
         # This creates /bin/* for better compatibility with Athena stuff
