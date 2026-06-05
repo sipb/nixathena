@@ -11,20 +11,20 @@
   lightdm-debathena-greeter,
   labwc,
   gtk-layer-shell,
-  onboard,
+  wvkbd,
 }:
 
 # Based on https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/li/lightdm-slick-greeter/package.nix
 # Note that the package name is lightdm-debathena-greeter (to follow Nix conventions) but the files are called debathena-lightdm-greeter!
 python3Packages.buildPythonApplication rec {
   pname = "lightdm-debathena-greeter";
-  version = "2.0.0";
+  version = "2.0.1";
   src = fetchFromForgejo {
     domain = "forgejo.mit.edu";
     owner = "SIPB";
     repo = "lightdm-config";
     rev = "v${version}";
-    hash = "sha256-4hzUZsPeEIh1+QC7GZjTra+E/QzuN3FhYVKm7ZNgZUo=";
+    hash = "sha256-k/aT0NI9hWb1D8NER9A5HGFnLodXwODdExVM82I7Mss=";
   };
 
   format = "other";
@@ -38,7 +38,7 @@ python3Packages.buildPythonApplication rec {
   buildInputs = [
     gtk3
     lightdm
-    onboard
+    wvkbd
     gtk-layer-shell
     labwc
   ];
@@ -76,7 +76,7 @@ python3Packages.buildPythonApplication rec {
     substituteInPlace $out/bin/debathena-lightdm-greeter \
       --replace-fail /usr/share/debathena-lightdm-config $out/share/debathena-lightdm-greeter \
       --replace-fail /etc/debathena-lightdm-greeter.ini $out/etc/debathena-lightdm-greeter.ini \
-      --replace-fail /usr/bin/onboard ${onboard}/bin/onboard
+      --replace-fail /usr/bin/wvkbd-mobintl ${wvkbd}/bin/wvkbd-mobintl
     substituteInPlace $out/share/xgreeters/debathena-lightdm-greeter.desktop \
       --replace-fail "labwc -s /usr/lib/debathena-lightdm-config/debathena-lightdm-greeter" "${labwc}/bin/labwc -s $out/bin/debathena-lightdm-greeter"
   '';
