@@ -26,7 +26,7 @@ in
   remctl = callPackage ./remctl.nix { };
   moira = callPackage ./moira.nix { };
   pam-afs-session = callPackage ./pam-afs-session.nix { };
-  lightdm-debathena-greeter = callPackage ./lightdm-debathena-greeter { };
+  lightdm-debathena-greeter = callPackage ./lightdm-debathena-greeter.nix { };
   libkrb5-e2fs = callPackage ./libkrb5-e2fs.nix { };
   zephyr = callPackage ./zephyr.nix { };
   barnowl = callPackage ./barnowl.nix { };
