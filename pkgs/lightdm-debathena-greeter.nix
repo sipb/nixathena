@@ -18,19 +18,18 @@
 # Note that the package name is lightdm-debathena-greeter (to follow Nix conventions) but the files are called debathena-lightdm-greeter!
 python3Packages.buildPythonApplication rec {
   pname = "lightdm-debathena-greeter";
-  version = "2.0.1";
+  version = "2.0.3";
   src = fetchFromForgejo {
     domain = "forgejo.mit.edu";
     owner = "SIPB";
     repo = "lightdm-config";
     rev = "v${version}";
-    hash = "sha256-k/aT0NI9hWb1D8NER9A5HGFnLodXwODdExVM82I7Mss=";
+    hash = "sha256-G8DXO1FqmLRSVZDSm+cB+fvHlGHFcXlzMOdQdcvKVSk=";
   };
 
   format = "other";
 
   nativeBuildInputs = [
-    librsvg
     gobject-introspection
     wrapGAppsHook3
   ];
@@ -41,6 +40,7 @@ python3Packages.buildPythonApplication rec {
     wvkbd
     gtk-layer-shell
     labwc
+    librsvg
   ];
 
   propagatedBuildInputs = with python3Packages; [
@@ -50,10 +50,10 @@ python3Packages.buildPythonApplication rec {
 
   extraFiles = ../img;
   postUnpack = ''
-    rsvg-convert --zoom 0.35 "$extraFiles"/logo.svg -o source/debian/debathena.png
+    cp "$extraFiles"/logo.svg source/debian/debathena.svg
     for i in {1..8}
     do
-      rsvg-convert --zoom 0.35 "$extraFiles"/logo$i.svg -o source/debian/debathena$i.png
+      cp "$extraFiles"/logo$i.svg source/debian/debathena$i.svg
     done
   '';
 
@@ -66,7 +66,7 @@ python3Packages.buildPythonApplication rec {
     cp debathena-lightdm-greeter $out/bin
     cp debathena-lightdm-greeter.ini $out/etc
     cp debathena-lightdm-greeter.desktop $out/share/xgreeters
-    cp debathena-lightdm-greeter.ui background.jpg debathena*.png $out/share/debathena-lightdm-greeter
+    cp debathena-lightdm-greeter.ui background.jpg debathena*.svg $out/share/debathena-lightdm-greeter
     runHook postInstall
   '';
 
