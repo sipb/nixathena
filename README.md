@@ -9,7 +9,7 @@ Special thanks to adehnert, andersk, and all other Debathena contributors for ma
 ## Features
 
 - Run programs from lockers using `athrun`/`attach`/`add` (Python implementation, not the original C)
-- The original Debathena login screen
+- The original Debathena login screen, now running on Wayland using labwc!
 - Moira
 - remctl and remctld
 - Zephyr and BarnOwl
