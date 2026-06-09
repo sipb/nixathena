@@ -21,7 +21,7 @@ See https://www.mit.edu/~xy/nixathena/ for config docs.
 
 ## Screenshots
 
-![LightDM login screen](img/login.png)
+![LightDM login screen](img/login.jpg)
 
 ![XFCE desktop](img/xfce.png)
 
@@ -73,5 +73,3 @@ Build docs (must have a clean working tree): `nix build .#docs-rendered`
 - Binary cache?
 - Package more Athena software?
 - More tests
-- New screenshots
-- Speed up the login process
