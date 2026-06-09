@@ -9,11 +9,11 @@ Special thanks to adehnert, andersk, and all other Debathena contributors for ma
 ## Features
 
 - Run programs from lockers using `athrun`/`attach`/`add` (Python implementation, not the original C)
-- The original Debathena login screen, now running on Wayland using labwc!
+- The original [Debathena login screen](https://forgejo.mit.edu/SIPB/lightdm-config), now running on Wayland using labwc!
 - Moira
 - remctl and remctld
 - Zephyr and BarnOwl
-- SSH in using your Kerberos password or Kerberos tickets
+- [SSH in using your Kerberos password or Kerberos tickets](docs/kerberized-server.md)
 - Use AFS as your home directory via `pam-afs-session`
 - x86_64, aarch64, and i686 are all supported
 
@@ -72,5 +72,6 @@ Build docs (must have a clean working tree): `nix build .#docs-rendered`
 - CI (run tests, generate and publish docs)
 - Binary cache?
 - Package more Athena software?
-- Figure our why XFCE takes 2 minutes to log in
 - More tests
+- New screenshots
+- Speed up the login process

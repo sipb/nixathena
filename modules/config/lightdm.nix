@@ -27,11 +27,6 @@ in
         };
         greeters.gtk.enable = false;
       };
-      # GROSS HACK
-      # This addresses two timing issues:
-      # 1. We need the greeter to stop and free up the VT (mainly affects XFCE Wayland)
-      # 2. Seems like it takes a bit before the user gains access to their AFS home dir causing a bunch of permission errors (however this sleep doesn't solve that problem)
-      sessionCommands = "sleep 2";
     };
   };
 }

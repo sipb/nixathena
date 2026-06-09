@@ -15,7 +15,12 @@
       settings = {
         libdefaults = {
           default_realm = "ATHENA.MIT.EDU";
-          forwardable = true; # So you don't have to pass `-f` to `kinit`
+          # So you don't have to pass `-f` to `kinit`
+          forwardable = true;
+          # More secure than storing tickets in /tmp
+          # https://www.mail-archive.com/openafs-info@openafs.org/msg41347.html
+          # TODO: Should we enable this?
+          # default_ccache_name = "KEYRING:persistent:%{uid}";
         };
         # The dialups have more domains listed but they're probably unnecessary for our purposes
         domain_realm = {
