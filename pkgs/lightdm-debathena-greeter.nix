@@ -18,13 +18,13 @@
 # Note that the package name is lightdm-debathena-greeter (to follow Nix conventions) but the files are called debathena-lightdm-greeter!
 python3Packages.buildPythonApplication rec {
   pname = "lightdm-debathena-greeter";
-  version = "2.0.3";
+  version = "2.0.4";
   src = fetchFromForgejo {
     domain = "forgejo.mit.edu";
     owner = "SIPB";
     repo = "lightdm-config";
     rev = "v${version}";
-    hash = "sha256-G8DXO1FqmLRSVZDSm+cB+fvHlGHFcXlzMOdQdcvKVSk=";
+    hash = "sha256-Z1ugoDOW092Ke4qnqaMYRN9BXdHbTnFLRA6PK0hfGkc=";
   };
 
   format = "other";
