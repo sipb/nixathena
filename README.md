@@ -67,9 +67,12 @@ TODO: How to run aarch64 tests on x86_64? (`nix run .#packages.aarch64-linux.tes
 
 Build docs (must have a clean working tree): `nix build .#docs-rendered`
 
+See the [workstations repo](https://forgejo.mit.edu/SIPB/workstations#building-a-vm) for how to build a VM.
+
 ## TODO
 
 - CI (run tests, generate and publish docs)
 - Binary cache?
-- Package more Athena software?
+- Package more Athena software? (i.e. machtype?)
 - More tests
+- Figure out why `attach` with no args throws an error
