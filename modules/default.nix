@@ -104,6 +104,24 @@ in
           enable = true;
           binfmt = true;
         };
+        # Simple reimplementation of /usr/athena/lib/init
+        # This also gets rid of the "initialization has not been performed" warnings
+        # The originals are at https://github.com/mit-athena/dotfiles and https://github.com/mit-athena/dotfiles
+        # However, a lot of stuff in there is either broken (ex: quota.debathena) or unnecessary
+        # So this super simple reimplementation probably causes less bugs actually
+        # Add more lines from the originals if people complain
+        # Note that environment.etc.<name>.target only works for stuff in /etc so we have to use a tmpfiles rule instead
+        systemd.tmpfiles.rules =
+          let
+            athena-bashrc = pkgs.writeText "athena-bashrc" ''
+              test -f ~/.bash_environment && source ~/.bash_environment
+              test -f ~/.bashrc.mine && source ~/.bashrc.mine
+            '';
+          in
+          [
+            "f+ /usr/athena/lib/init/bash_login 0644 root root -"
+            "L+ /usr/athena/lib/init/bashrc - - - - ${athena-bashrc}"
+          ];
       })
     ]
   );
