@@ -21,7 +21,7 @@ in
     services.xserver.displayManager = {
       lightdm = {
         enable = true;
-        greeter = lib.mkDefault {
+        greeter = {
           package = athena-pkgs.lightdm-debathena-greeter.xgreeters;
           name = "debathena-lightdm-greeter";
         };
