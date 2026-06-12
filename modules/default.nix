@@ -97,6 +97,8 @@ in
             mkdir $out/athena
             ln -s ${pkgs.bash}/bin/bash $out/bash
             ln -s ${pkgs.bash}/bin/bash $out/athena/bash
+            ln -s ${pkgs.zsh}/bin/zsh $out/zsh
+            ln -s ${pkgs.zsh}/bin/zsh $out/athena/zsh
           '';
         };
         # Allow running AppImages seamlessly
