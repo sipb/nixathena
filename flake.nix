@@ -40,16 +40,9 @@
             # default apparently blocks network.
             meta = test-infra.metaTest.driver;
           };
-          docs-rendered = pkgs.callPackage ./docs/rendered.nix {
-            docs-raw = pkgs.callPackage ./docs/raw.nix {
-              hash = if (self ? rev) then self.rev else "placeholder_hash";
-            };
-            title = "Nixathena module options for ${if (self ? rev) then self.rev else "placeholder_hash"}";
-          };
+          docs = pkgs.callPackage ./docs/options.nix { };
         }
       );
-
-      overlays.default = import ./pkgs;
 
       nixosModules.default = import ./modules;
 

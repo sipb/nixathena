@@ -17,8 +17,6 @@ Special thanks to adehnert, andersk, and all other Debathena contributors for ma
 - Use AFS as your home directory via `pam-afs-session`
 - x86_64, aarch64, and i686 are all supported
 
-See https://www.mit.edu/~xy/nixathena/ for config docs.
-
 ## Screenshots
 
 ![LightDM login screen](img/login.jpg)
@@ -59,19 +57,21 @@ nixathena.enable = true;
 # nixathena.workstation = true;
 ```
 
+See [this file](docs/options.md) for the list of configurable options for Nixathena.
+
 ## Development
 
 Run tests: `nix run .#test.meta`
 
 TODO: How to run aarch64 tests on x86_64? (`nix run .#packages.aarch64-linux.test.meta` will run the qemu-system-aarch64 using qemu-user-static-aarch64 which is really slow)
 
-Build docs (must have a clean working tree): `nix build .#docs-rendered`
+Build docs: `nix build .#docs && install -m644 result/options.md docs`
 
 See the [workstations repo](https://forgejo.mit.edu/SIPB/workstations#building-a-vm) for how to build a VM.
 
 ## TODO
 
-- CI (run tests, generate and publish docs)
+- CI
 - Binary cache?
 - Package more Athena software? (i.e. machtype?)
 - More tests
