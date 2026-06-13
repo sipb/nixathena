@@ -1,3 +1,7 @@
+# This script is a workaround for https://github.com/NixOS/nix/issues/7965
+# Our simple trick is that we add the packages to a fresh new profile, and then atomically switch
+# This also means we don't need do any file locking
+
 if set -q XDG_CONFIG_HOME
     set pkgsync_file $XDG_CONFIG_HOME/pkgsync
 else
@@ -10,17 +14,18 @@ if ! test -e $pkgsync_file
     exit 1
 end
 
-nix profile remove --all &> /dev/null
-
+set pkgs
 for line in (cat $pkgsync_file)
     if string match -q '#*' $line
         continue
     end
-    echo "Installing $line"
     if string match -q '*#*' $line
-        set pkg $line
+        set -a pkgs $line
     else
-        set pkg nixpkgs#$line
+        set -a pkgs nixpkgs#$line
     end
-    nix profile add $pkg
 end
+
+set profile ~/.local/state/nix/profiles/(date +%s)
+nix profile add $pkgs --profile $profile
+ln -sfn $profile ~/.local/state/nix/profile
