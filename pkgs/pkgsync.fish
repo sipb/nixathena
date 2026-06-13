@@ -1,25 +1,25 @@
 if set -q XDG_CONFIG_HOME
-    set PKGSYNC_FILE $XDG_CONFIG_HOME/pkgsync
+    set pkgsync_file $XDG_CONFIG_HOME/pkgsync
 else
-    set PKGSYNC_FILE ~/.config/pkgsync
+    set pkgsync_file ~/.config/pkgsync
 end
 
-if ! test -e $PKGSYNC_FILE
-    echo "$PKGSYNC_FILE not found"
+if ! test -e $pkgsync_file
+    echo "$pkgsync_file not found"
     exit 1
 end
 
 nix profile remove --all &> /dev/null
 
-for line in (cat $PKGSYNC_FILE)
+for line in (cat $pkgsync_file)
     if string match -q '#*' $line
         continue
     end
     echo "Installing $line"
     if string match -q '*#*' $line
-        set PKG $line
+        set pkg $line
     else
-        set PKG nixpkgs#$line
+        set pkg nixpkgs#$line
     end
-    nix profile add $PKG
+    nix profile add $pkg
 end
