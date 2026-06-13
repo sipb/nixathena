@@ -38,8 +38,9 @@ in
               # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=846377
               # https://docs.google.com/document/d/1P27fP1uj-C8QdxDKMKtI-Qh00c5_9zJa4YHjnpB6ODM/pub
               # https://github.com/systemd/systemd/issues/7261
-              # This hacky line disables AFS PAGs for local logins at the expense of security
-              settings.nopag = service == "login";
+              # This hacky line disables AFS PAGs for local and SSH logins at the expense of security
+              # We also disable it for SSH so that systemd --user can properly run the pkgsync service
+              settings.nopag = true;
             };
           };
         };

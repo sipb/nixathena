@@ -372,6 +372,38 @@ true
 
 
 
+## nixathena\.pkgsync\.enable
+
+
+
+Whether to enable pkgsync, a nix profile convenience wrapper\.
+
+
+
+*Type:*
+boolean
+
+
+
+*Default:*
+
+```nix
+config.nixathena.workstation
+```
+
+
+
+*Example:*
+
+```nix
+true
+```
+
+*Declared by:*
+ - [/modules/config/pkgsync\.nix](../modules/config/pkgsync.nix)
+
+
+
 ## nixathena\.pyhesiodfs\.enable
 
 

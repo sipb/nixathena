@@ -25,6 +25,7 @@ in
     ./config/ldap.nix
     ./config/lightdm.nix
     ./config/pam-afs-session.nix
+    ./config/pkgsync.nix
     ./config/zephyr.nix
     ./services/discussd.nix
     ./services/pyhesiodfs.nix
