@@ -5,7 +5,8 @@ else
 end
 
 if ! test -e $pkgsync_file
-    echo "$pkgsync_file not found"
+    echo "$pkgsync_file not found" >&2
+    echo "You should create a package list first" >&2
     exit 1
 end
 
