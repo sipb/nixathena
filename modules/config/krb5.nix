@@ -21,6 +21,10 @@
           # https://www.mail-archive.com/openafs-info@openafs.org/msg41347.html
           default_ccache_name = "KEYRING:persistent:%{uid}";
         };
+        # For pam_krb5.so
+        # https://serverfault.com/a/1046095
+        # %u is correct here, not %{uid}!
+        appdefaults.pam.ccache = "KEYRING:persistent:%u";
         # The dialups have more domains listed but they're probably unnecessary for our purposes
         domain_realm = {
           ".exchange.mit.edu" = "EXCHANGE.MIT.EDU";
