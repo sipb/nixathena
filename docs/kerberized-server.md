@@ -11,7 +11,9 @@ k5srvutil change -e aes256-cts:normal,aes128-cts:normal # Only use secure cipher
 k5srvutil delold # Delete old keys
 ```
 
-Make sure your `/etc/ssh/sshd_config` file includes the line
+If you're using Nixathena with `nixathena.workstation = true`, then you can skip the following steps.
+
+Otherwise, make sure your `/etc/ssh/sshd_config` file includes the line
 
 ```
 GSSAPIAuthentication yes
@@ -19,4 +21,6 @@ GSSAPIAuthentication yes
 
 This will let you SSH in with Kerberos.
 
-Now on the client machine, run `kinit USERNAME` and then `ssh -K USERNAME@server.mit.edu`. If you run into permission issues on the server and `klist` doesn't show any tickets, run `kinit -f USERNAME` on the client instead to make the tickets forwardable (this is already enabled by default on machines running Nixathena).
+Additionally, make sure `hostname --fqdn` prints out `hostname.mit.edu`. If not, then add the line `127.0.0.1 hostname.mit.edu hostname` to `/etc/hosts`.
+
+Now on the client machine, run `kinit USERNAME` and then `ssh -K USERNAME@hostname.mit.edu`. If you run into permission issues on the server and `klist` doesn't show any tickets, run `kinit -f USERNAME` on the client instead to make the tickets forwardable (this is already enabled by default on machines running Nixathena).
