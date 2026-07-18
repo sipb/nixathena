@@ -11,7 +11,8 @@ end
 if ! test -e $pkgsync_file
     echo "$pkgsync_file not found" >&2
     echo "You should create a package list first" >&2
-    exit 1
+    # Exit with successful status so that the systemd service isn't marked as failed
+    exit 0
 end
 
 set pkgs
