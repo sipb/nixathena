@@ -56,12 +56,12 @@
     };
     # Only allow Kerberos login on workstations
     security.pam.krb5.enable = config.nixathena.workstation;
-    programs.ssh.package = pkgs.opensshWithKerberos;
+    programs.ssh.package = pkgs.openssh_gssapi;
     services.openssh = {
       # You also need to get a keytab for the SSH server!
       # See docs/kerberized-server.md
       # https://www.kevindiaz.dev/blog/configuring-openssh-to-use-kerberos-authentication.html
-      package = pkgs.opensshWithKerberos;
+      package = pkgs.openssh_gssapi;
       extraConfig = ''
         GSSAPIAuthentication yes
       '';
