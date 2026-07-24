@@ -13,6 +13,7 @@ pkgs.testers.nixosTest {
       imports = [
         self.nixosModules.default
       ];
+      config.nixathena.enable = true;
     };
 
   testScript = ''
@@ -20,7 +21,8 @@ pkgs.testers.nixosTest {
     # network-online.service is too long to wait
     # afsd.service is (seemingly) long enough to have network
     machine.wait_for_unit("afsd.service")
-    [status, out] = machine.execute("ping -c1 google.com")
+    # Force IPv4 due to MIT IPv6 wonkiness
+    [status, out] = machine.execute("ping -4 -c1 example.com")
     print(out)
     machine.succeed('ls /afs/athena.mit.edu/')
     machine.succeed('test -e /mit/sipb/README')
