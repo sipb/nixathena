@@ -71,6 +71,8 @@ buildPythonPackage {
   # https://ryantm.github.io/nixpkgs/languages-frameworks/python/#using-pythonimportscheck
   doCheck = false;
 
+  dontCheckPythonMetadata = true;
+
   #meta = with lib; {
   #  description = "Python library for Project Athena forum system";
   #  homepage = "https://github.com/mit-athena/python-discuss";

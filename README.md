@@ -61,9 +61,9 @@ See [this file](docs/options.md) for the list of configurable options for Nixath
 
 ## Development
 
-Run tests: `nix run .#test.meta`
+Run tests: `nix run .#test.meta` (TODO: Fix the failing test)
 
-TODO: How to run aarch64 tests on x86_64? (`nix run .#packages.aarch64-linux.test.meta` will run the qemu-system-aarch64 using qemu-user-static-aarch64 which is really slow)
+TODO: How to run aarch64 tests on x86_64? (`nix run .#packages.aarch64-linux.test.meta` will run `qemu-system-aarch64` using `qemu-user-static-aarch64` which is really slow)
 
 Build docs: `nix build .#docs && install -m644 result/options.md docs`
 

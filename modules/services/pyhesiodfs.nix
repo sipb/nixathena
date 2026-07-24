@@ -23,7 +23,10 @@ in
       isSystemUser = true;
       group = "pyhesiodfs";
     };
-    programs.fuse.userAllowOther = true;
+    programs.fuse = {
+      enable = true;
+      userAllowOther = true;
+    };
 
     # systemd unit
     systemd.services."pyhesiodfs" = {
