@@ -11,26 +11,16 @@
         "i686-linux"
         "aarch64-linux"
       ];
-      forAllSystems =
-        f:
-        nixpkgs.lib.genAttrs systems (
-          system:
-          let
-            pkgs = nixpkgs.legacyPackages.${system};
-          in
-          f system pkgs
-        );
+      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
       packages = forAllSystems (
-        system: pkgs:
-        (import ./default.nix {
-          pkgs = import nixpkgs { inherit system; };
-        })
+        pkgs:
+        (import ./default.nix { inherit pkgs; })
         // rec {
           # This lets you pick the driver function
           test-infra = {
-            metaTest = pkgs.callPackage ./test/meta.nix { inherit self system; };
+            metaTest = pkgs.callPackage ./test/meta.nix { inherit self; };
           };
           # This is what should actually get run
           test = {
@@ -46,12 +36,10 @@
 
       nixosModules.default = import ./modules;
 
-      checks = forAllSystems (
-        system: pkgs: {
-          # Add things here if we ever get anything that doesn't need network
-        }
-      );
+      checks = forAllSystems (pkgs: {
+        # Add things here if we ever get anything that doesn't need network
+      });
 
-      formatter = forAllSystems (system: pkgs: pkgs.nixfmt-tree);
+      formatter = forAllSystems (pkgs: pkgs.nixfmt-tree);
     };
 }
