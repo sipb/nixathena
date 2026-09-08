@@ -1,20 +1,20 @@
 {
   stdenv,
   lib,
-  fetchFromGitHub,
+  fetchFromForgejo,
   python3Packages,
 }:
 
-python3Packages.buildPythonApplication {
+python3Packages.buildPythonApplication rec {
   pname = "pyhesiodfs";
-  version = "1.1";
+  version = "1.2";
 
-  src = fetchFromGitHub {
-    #owner = "mit-athena";
-    owner = "dehnert";
+  src = fetchFromForgejo {
+    domain = "forgejo.mit.edu";
+    owner = "SIPB";
     repo = "pyhesiodfs";
-    rev = "master";
-    hash = "sha256-5Y10agUgfPuJ7Mg8IR0ZMtgqMXmG8F+kTQyjXrBGnBk=";
+    rev = "v${version}";
+    hash = "sha256-7pwcFDYx+sr6XztLK3FYAgQ95re6MDZA3yqOR7X1e9c=";
   };
 
   pyproject = true;
@@ -26,9 +26,10 @@ python3Packages.buildPythonApplication {
     locker-support
   ];
 
-  #meta = with lib; {
-  #  description = "Python library for Project Athena forum system";
-  #  homepage = "https://github.com/mit-athena/python-discuss";
-  #  platforms = platforms.linux;
-  #};
+  meta = with lib; {
+    description = "Modern fork of https://github.com/mit-athena/pyhesiodfs";
+    homepage = "https://forgejo.mit.edu/SIPB/pyhesiodfs";
+    platforms = platforms.linux;
+    license = licenses.gpl2;
+  };
 }

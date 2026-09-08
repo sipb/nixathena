@@ -75,4 +75,3 @@ See the [workstations repo](https://forgejo.mit.edu/SIPB/workstations#building-a
 - Binary cache?
 - Package more Athena software? (i.e. machtype?)
 - More tests
-- Figure out why `attach` with no args throws an error

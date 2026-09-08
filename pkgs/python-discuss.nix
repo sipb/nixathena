@@ -26,6 +26,8 @@ buildPythonPackage {
     setuptools
   ];
 
+  dontCheckPythonMetadata = true;
+
   pythonImportsCheck = [
     "discuss"
     "discuss.client"
