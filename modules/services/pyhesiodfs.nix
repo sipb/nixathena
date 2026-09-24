@@ -44,7 +44,7 @@ in
         Environment = "pyhesiodfs_dir=/mit";
         OOMScoreAdjust = -1000;
         User = "pyhesiodfs";
-        ExecStart = "${athena-pkgs.pyhesiodfs}/bin/pyhesiodfs -f $pyhesiodfs_dir -o nonempty";
+        ExecStart = "${athena-pkgs.pyhesiodfs}/bin/pyhesiodfs -f $pyhesiodfs_dir";
       };
       wantedBy = [
         "multi-user.target"

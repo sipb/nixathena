@@ -73,9 +73,9 @@ buildPythonPackage {
 
   dontCheckPythonMetadata = true;
 
-  #meta = with lib; {
-  #  description = "Python library for Project Athena forum system";
-  #  homepage = "https://github.com/mit-athena/python-discuss";
-  #  platforms = platforms.linux;
-  #};
+  meta = with lib; {
+    description = "Python-based interface to the AFS APIs";
+    homepage = "https://github.com/macathena/python-afs";
+    platforms = platforms.linux;
+  };
 }

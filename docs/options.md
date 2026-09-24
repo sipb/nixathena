@@ -51,7 +51,7 @@ list of package
   <derivation remctl-3.18>
   <derivation moira-4.2.4.0>
   <derivation zephyr-3.1.2>
-  <derivation python3.13-locker-support-10.4.8>
+  <derivation python3.14-locker-support-10.4.8>
   <derivation barnowl-1.11-master-1f65aee>
   <derivation athrun-10.3.2-3c9c5b7>
 ]

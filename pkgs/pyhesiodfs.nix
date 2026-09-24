@@ -7,21 +7,21 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "pyhesiodfs";
-  version = "1.2";
+  version = "2.0";
 
   src = fetchFromForgejo {
     domain = "forgejo.mit.edu";
     owner = "SIPB";
     repo = "pyhesiodfs";
     rev = "v${version}";
-    hash = "sha256-7pwcFDYx+sr6XztLK3FYAgQ95re6MDZA3yqOR7X1e9c=";
+    hash = "sha256-eirRm9NPbw+7jbgijZ9J6pIM4iBZjjGL60E0Jt8+rcg=";
   };
 
   pyproject = true;
   build-system = [ python3Packages.setuptools ];
 
   dependencies = with python3Packages; [
-    fuse
+    mfusepy
     python-hesiod
     locker-support
   ];

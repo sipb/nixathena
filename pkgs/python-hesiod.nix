@@ -44,9 +44,9 @@ buildPythonPackage {
 
   dontCheckPythonMetadata = true;
 
-  #meta = with lib; {
-  #  description = "Python library for Project Athena forum system";
-  #  homepage = "https://github.com/mit-athena/python-discuss";
-  #  platforms = platforms.linux;
-  #};
+  meta = with lib; {
+    description = "Python bindings for the Heisod naming library";
+    homepage = "https://github.com/macathena/python-hesiod";
+    platforms = platforms.linux;
+  };
 }
