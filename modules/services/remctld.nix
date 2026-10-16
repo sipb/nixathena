@@ -12,11 +12,11 @@ let
   athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
-  options.nixathena.remctld = (
+  options.nixathena.remctld =
     let
-      mkOption = lib.mkOption;
-      mkEnableOption = lib.mkEnableOption;
-      types = lib.types;
+      inherit (lib) mkOption;
+      inherit (lib) mkEnableOption;
+      inherit (lib) types;
 
       remctl_options = {
         executable = mkOption {
@@ -67,8 +67,7 @@ in
           )
         );
       };
-    }
-  );
+    };
 
   config = lib.mkIf cfg.enable {
     #users.users.root.password = builtins.trace modulesPath "";

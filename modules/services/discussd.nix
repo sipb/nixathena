@@ -10,21 +10,14 @@ let
   athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
-  options.nixathena.discussd = (
-    let
-      mkOption = lib.mkOption;
-      mkEnableOption = lib.mkEnableOption;
-      types = lib.types;
-    in
-    {
-      enable = mkEnableOption "discussd";
-      openFirewall = mkOption {
-        description = "open firewall for discuss (if service enabled)";
-        default = true;
-        type = types.bool;
-      };
-    }
-  );
+  options.nixathena.discussd = {
+    enable = lib.mkEnableOption "discussd";
+    openFirewall = lib.mkOption {
+      description = "open firewall for discuss (if service enabled)";
+      default = true;
+      type = lib.types.bool;
+    };
+  };
 
   config = lib.mkIf cfg.enable {
     users.groups.discuss = { };
