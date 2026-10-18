@@ -82,7 +82,7 @@ in
     # [^1]: https://sourceware.org/git/?p=glibc.git;a=blob;f=nscd/nscd_helper.c;h=6319fde6f2d17183221289b838041aea94433d6b;hb=HEAD#l543
     # [^2]: https://sourceware.org/git/?p=glibc.git;a=blob;f=nscd/nscd_getpw_r.c;h=f19b7a271c6c4058231c62249268e2c520444f5e;hb=HEAD#l127
     # [^3]: https://sourceware.org/git/?p=glibc.git;a=blob;f=nscd/nscd_proto.h;h=917324aebd3f9633355d9023c048308ebf77117f;hb=HEAD#l26
-    systemd.services.systemd-logind.serviceConfig = {
+    systemd.services.systemd-logind.serviceConfig = lib.mkIf cfg.nsswitch {
       RestrictAddressFamilies = [
         "AF_INET"
         "AF_INET6"
