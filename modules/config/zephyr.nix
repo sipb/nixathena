@@ -25,6 +25,8 @@ in
       serviceConfig = {
         Type = "simple";
         ExecStart = "${lib.getBin athena-pkgs.zephyr}/bin/zhm -n -f";
+        DynamicUser = true;
+        # TODO: More systemd sandboxing
       };
     };
   };

@@ -13,7 +13,8 @@ let
 in
 {
   options.nixathena.pyhesiodfs.enable = lib.mkEnableOption "pyhesiodfs" // {
-    default = true;
+    default = config.nixathena.enable;
+    defaultText = true;
   };
 
   config = lib.mkIf cfg.enable {

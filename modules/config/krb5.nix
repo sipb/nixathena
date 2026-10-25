@@ -7,7 +7,8 @@
 
 {
   options.nixathena.krb5.enable = lib.mkEnableOption "Kerberos for ATHENA.MIT.EDU" // {
-    default = true;
+    default = config.nixathena.enable;
+    defaultText = true;
   };
   config = lib.mkIf config.nixathena.krb5.enable {
     security.krb5 = {
