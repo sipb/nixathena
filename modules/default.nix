@@ -87,10 +87,10 @@ in
         # We need this for Kerberos login
         networking.domain = "mit.edu";
         # For running dynamically linked stufff
-        programs.nix-ld.enable = true;
+        programs.nix-ld.enable = lib.mkDefault true;
         # This creates /bin/* for better compatibility with Athena stuff
         services.envfs = {
-          enable = true;
+          enable = lib.mkDefault true;
           # We need special handling for /bin/bash because envfs doesn't work with sshd for some reason
           # Some people have the shell /bin/athena/bash for some reason??
           # I've also seen /bin/athena/tcsh in the wild 🙀️
@@ -104,7 +104,7 @@ in
         };
         # Allow running AppImages seamlessly
         programs.appimage = {
-          enable = true;
+          enable = lib.mkDefault true;
           binfmt = true;
         };
         # Simple reimplementation of /usr/athena/lib/init
