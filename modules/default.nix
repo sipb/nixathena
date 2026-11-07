@@ -20,6 +20,7 @@ let
 in
 {
   imports = [
+    ./config/afs.nix
     ./config/hesiod.nix
     ./config/krb5.nix
     ./config/ldap.nix
@@ -55,10 +56,6 @@ in
     lib.mkMerge [
       {
         environment.systemPackages = cfg.packages;
-        services.openafsClient = {
-          enable = lib.mkDefault true;
-          cellName = lib.mkDefault "athena.mit.edu";
-        };
         # `add` command
         programs = {
           bash.interactiveShellInit = ''

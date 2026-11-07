@@ -8,6 +8,7 @@ in
   debathena-aclocal = callPackage ./aclocal.nix { };
   discuss = callPackage ./discuss.nix { };
   hesiod = callPackage ./hesiod.nix { };
+  kafs = callPackage ./kafs.nix { };
   pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
     (
       python-final: python-prev:
